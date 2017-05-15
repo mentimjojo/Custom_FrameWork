@@ -19,6 +19,8 @@ class Core
     {
         // Run AutoLoader
         new AutoLoader(__DIR__);
+        // Run config
+        new Config();
     }
 
 }
