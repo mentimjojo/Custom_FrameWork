@@ -45,5 +45,10 @@ class ErrorHandler {
         die($template);
     }
 
+
+    private function Error_Handler($errno, $errstr, $errfile, $errline){
+
+    }
+
 }
 ?>
