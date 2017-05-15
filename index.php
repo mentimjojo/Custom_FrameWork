@@ -13,7 +13,7 @@ require_once __DIR__ . '/core/Core.php';
  */
 new Core();
 
-ErrorHandler::debug(false);
+ErrorHandler::debug(true);
 
 $database = new Database();
 $database->setType('MySQLi');
