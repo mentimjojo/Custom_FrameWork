@@ -59,7 +59,13 @@ class ErrorHandler
         die($template);
     }
 
-
+    /**
+     * Custom error handler, if debug is enabled, error is shown direct. If debug is disabled error is stored in an error file.
+     * @param $errno
+     * @param $errstr
+     * @param $errfile
+     * @param $errline
+     */
     public function Error_Handler($errno, $errstr, $errfile, $errline)
     {
         // Report error when debug is enabled.
@@ -79,7 +85,7 @@ class ErrorHandler
         } else {
             // Error message
             $error = "Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
-            // Send error
+            // Save error in file
             file_put_contents(Constants::$path_root.'/logs/errors/' . date('d-m-y', time()), $error, FILE_APPEND);
         }
     }

@@ -13,6 +13,9 @@ require_once __DIR__ . '/core/Core.php';
  */
 new Core();
 
+/**
+ * Test fase
+ */
 ErrorHandler::debug(true);
 
 $database = new Database();
