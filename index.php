@@ -13,7 +13,7 @@ require_once __DIR__ . '/core/Core.php';
  */
 new Core();
 
-ErrorHandler::debug(true);
+ErrorHandler::debug(false);
 
 $database = new Database();
 $database->setType('MySQLi');
@@ -26,4 +26,6 @@ foreach ($query as $item){
     var_dump($item);
     echo '<br/><br/>';
 }
+
+trigger_error("leuk");
 ?>

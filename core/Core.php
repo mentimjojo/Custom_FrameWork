@@ -21,6 +21,8 @@ class Core
         new AutoLoader(__DIR__);
         // Run config
         new Config();
+        // Run Error
+        new ErrorHandler();
     }
 
 }
