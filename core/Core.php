@@ -32,13 +32,13 @@ class Core
         // Run Error
         new ErrorHandler();
         // Run routes
-        new Routes();
+        $Routes = new Routes();
         // Run utils
         new Utils();
         // Load public
         $autoLoader->loadPublic();
         // Load routes
-        Routes::load();
+        $Routes->load();
     }
 
 }

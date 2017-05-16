@@ -79,7 +79,7 @@ class Routes
     /**
      * Load system
      */
-    public static function load()
+    public function load()
     {
         // Check set
         if (isset(self::$routes[self::$route])) {
