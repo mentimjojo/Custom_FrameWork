@@ -1,0 +1,23 @@
+## THIS IS PART OF FRAMEWORK ##
+
+# Rewrite Engine
+RewriteEngine on
+
+# Set index
+DirectoryIndex framework.php
+
+# Rewrite Cond
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Get and set page in variable
+RewriteRule ^(.*) framework.php?route=$1 [L]
+
+## UNTIL HERE IS PART OF FRAMEWORK ##
+
+# php -- BEGIN cPanel-generated handler, do not edit
+# Stel het pakket ’ea-php71’ in als de standaard programmeertaal ’PHP’.
+<IfModule mime_module>
+  AddType application/x-httpd-ea-php71 .php .php7 .phtml
+</IfModule>
+# php -- END cPanel-generated handler, do not edit

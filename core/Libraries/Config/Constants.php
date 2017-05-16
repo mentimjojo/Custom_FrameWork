@@ -15,9 +15,17 @@ class Constants {
 
     /**
      * Root path
+     * Without /
      * @var string
      */
-    public static $path_root = __DIR__ . '/../../../';
+    public static $path_root = __DIR__ . '/../../..';
+
+    /**
+     * Path public
+     * Without /
+     * @var string
+     */
+    public static $path_public = __DIR__ . '/../../../public';
 
 }
 ?>

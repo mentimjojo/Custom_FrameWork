@@ -23,6 +23,12 @@ class Core
         new Config();
         // Run Error
         new ErrorHandler();
+        // Run routes
+        new Routes();
+        // Load public
+        AutoLoader::loadPublic();
+        // Load routes
+        Routes::load();
     }
 
 }

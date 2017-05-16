@@ -23,21 +23,6 @@ class ErrorHandler
     }
 
     /**
-     * Create error
-     * @param int $code
-     * @param string $message
-     * @return array
-     */
-    public static function create(int $code, string $message): array
-    {
-        // Return error
-        return array(
-            "code" => $code,
-            "message" => $message
-        );
-    }
-
-    /**
      * Die page with some layout
      * @param int $code
      * @param string $message

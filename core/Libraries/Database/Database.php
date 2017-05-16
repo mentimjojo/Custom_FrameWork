@@ -104,6 +104,9 @@ class Database
             case "MSSQL":
                 $this->db_engine = new MSSQL_SQLSRV($this->serverName, $this->credentials);
                 break;
+            default:
+                ErrorHandler::die(101,  'Database engine not supported');
+                break;
         }
     }
 
