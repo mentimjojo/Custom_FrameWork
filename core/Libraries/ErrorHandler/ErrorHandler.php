@@ -71,7 +71,7 @@ class ErrorHandler
             // Error message
             $error = "Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::$path_root.'/logs/errors/' . date('d-m-y', time()), $error, FILE_APPEND);
+            file_put_contents(Constants::$path_root.'/logs/errors/' . date('d-m-Y', time()), $error, FILE_APPEND);
         }
     }
 
