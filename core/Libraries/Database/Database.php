@@ -11,13 +11,19 @@ class Database
      * Supported Database engines
      * @var array
      */
-    private $types = array("MySQLi", "PDO");
+    private $engines = array("MySQLi", "PDO", "MSSQL");
 
     /**
-     * Database type to connect
+     * Database engine to connect
      * @var
      */
-    private $type;
+    private $engine;
+
+    /**
+     * Server name & Port
+     * @var
+     */
+    private $serverName;
 
     /**
      * Credentials for the Database
@@ -33,14 +39,14 @@ class Database
 
     /**
      * Set database type
-     * @param string $Type
+     * @param string $engine
      * @return array
      */
-    public function setType(string $Type) : array {
+    public function setEngine(string $engine) : array {
         // Check type supported
-        if(in_array($Type, $this->types)){
+        if(in_array($engine, $this->engines)){
             // Set type
-            $this->type = $Type;
+            $this->engine = $engine;
             // Return true
             return array('true');
         } else {
@@ -49,6 +55,16 @@ class Database
         }
         // Just to be sture
         return array('false');
+    }
+
+    /**
+     * Set server name & port for MSSQL
+     * @param string $srvName
+     * @param int $port
+     */
+    public function setMsServer(string $srvName, int $port = 1433){
+        // Save in variable
+        $this->serverName = $srvName . ', ' . $port;
     }
 
     /**
@@ -78,13 +94,28 @@ class Database
      */
     public function createConnection(){
         // Switch to right Engine
-        switch ($this->type){
+        switch ($this->engine){
             case "PDO":
                 $this->db_engine = new MySQL_PDO($this->credentials);
                 break;
             case "MySQLi":
                 $this->db_engine = new MySQL_MySQLi($this->credentials);
                 break;
+            case "MSSQL":
+                $this->db_engine = new MSSQL_SQLSRV($this->serverName, $this->credentials);
+                break;
+        }
+    }
+
+    /**
+     * Get connection to create your own query system.
+     * @return mixed
+     */
+    public function getConnection(){
+        if(isset($this->db_engine)) {
+            return $this->db_engine->getConnection();
+        } else {
+            return null;
         }
     }
 
@@ -93,19 +124,16 @@ class Database
      * @return mixed
      */
     public function runQuery(string $query){
-        switch ($this->type){
-            case "PDO":
-                $stm = $this->db_engine->query($query);
-                break;
-            case "MySQLi":
-                $stm = $this->db_engine->query($query);
-                break;
-            default:
-                $stm = array('status' => false, 'msg' => 'Error. Did you select a database type?!');
-                break;
+        // Check if db engine exists
+        if(isset($this->db_engine)) {
+            // Create query
+            $stm = $this->db_engine->query($query);
+            // Return query
+            return $stm;
+        } else {
+            // Return error
+            return null;
         }
-        // Return query
-        return $stm;
     }
 
 

@@ -27,7 +27,7 @@ class MySQL_MySQLi {
     }
 
     /**
-     * Connect to database with PDO
+     * Connect to database with MySQLi
      */
     private function connect(){
         try {
@@ -40,6 +40,18 @@ class MySQL_MySQLi {
             );
         } catch (Exception $ex){
             ErrorHandler::die(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
+        }
+    }
+
+    /**
+     * Get connection
+     * @return mixed
+     */
+    public function getConnection(){
+        if(isset($this->connection)){
+            return $this->connection;
+        } else {
+            return null;
         }
     }
 

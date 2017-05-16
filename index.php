@@ -1,8 +1,4 @@
 <?php
-// Display errors
-ini_set('display_errors', 1);
-// Enable error reporting
-error_reporting(E_ALL);
 /**
  * Get Core
  */
@@ -18,10 +14,13 @@ new Core();
  */
 ErrorHandler::debug(true);
 
+
 $database = new Database();
-$database->setType('MySQLi');
+$database->setEngine('PDO');
 $database->setCredentials('localhost', 'ictdev_framework', 'ictdev_framework', 'OEiim@Qb%(vJ');
 $database->createConnection();
+
+var_dump($database->getConnection());
 
 $query = $database->runQuery('SELECT * FROM test');
 
@@ -30,5 +29,4 @@ foreach ($query as $item){
     echo '<br/><br/>';
 }
 
-trigger_error("leuk");
 ?>

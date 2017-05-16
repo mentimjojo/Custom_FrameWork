@@ -42,6 +42,18 @@ class MySQL_PDO {
     }
 
     /**
+     * Get connection
+     * @return mixed
+     */
+    public function getConnection(){
+        if(isset($this->connection)){
+            return $this->connection;
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Run query
      * @param string $query
      * @return array|bool
