@@ -18,7 +18,7 @@ class Core
     public function __construct()
     {
         // Run AutoLoader
-        new AutoLoader(__DIR__);
+        $autoLoader = new AutoLoader(__DIR__);
         // Run config
         new Config();
         // Run Error
@@ -26,7 +26,7 @@ class Core
         // Run routes
         new Routes();
         // Load public
-        AutoLoader::loadPublic();
+        $autoLoader->loadPublic();
         // Load routes
         Routes::load();
     }

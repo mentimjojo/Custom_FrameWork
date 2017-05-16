@@ -13,16 +13,6 @@ class ErrorHandler
     }
 
     /**
-     * Set debug
-     * @param bool $toggle
-     */
-    public static function debug(bool $toggle = false)
-    {
-        // Set debug
-        Constants::$debug = $toggle;
-    }
-
-    /**
      * Die page with some layout
      * @param int $code
      * @param string $message
@@ -70,8 +60,9 @@ class ErrorHandler
         } else {
             // Error message
             $error = "Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
+            // Error file path
             // Save error in file
-            file_put_contents(Constants::$path_root.'/logs/errors/' . date('d-m-Y', time()), $error, FILE_APPEND);
+            file_put_contents(Constants::$path_root.'/logs/errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
     }
 
