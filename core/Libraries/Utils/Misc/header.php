@@ -7,7 +7,7 @@ class Header {
      * @param int $delay
      * @param bool $end
      */
-    public static final function redirect(string $url, int $delay, bool $end = false){
+    public final function redirect(string $url, int $delay, bool $end = false){
         // Run ob
         ob_start();
         // Redirect

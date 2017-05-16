@@ -42,7 +42,7 @@ class Settings
         // Check if enabled
         if (Constants::$ssl) {
             if ($_SERVER["HTTPS"] != "on") {
-                Utils::redirect(Constants::$url_root . '/' . $_SERVER["REQUEST_URI"], 0, true);
+                Utils::$header->redirect(Constants::$url_root . '/' . $_SERVER["REQUEST_URI"], 0, true);
             }
         }
     }
