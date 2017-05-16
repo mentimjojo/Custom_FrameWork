@@ -33,8 +33,11 @@ class Routes {
      * Get route from url
      */
     private function getRoute(){
-        // Get route from URL
-        self::$route = $_GET['route'];
+        // Check if route isset
+        if(isset($_GET['route'])) {
+            // Get route from URL
+            self::$route = $_GET['route'];
+        }
     }
 
     /**
@@ -53,7 +56,7 @@ class Routes {
      */
     public static function setHome(string $path) {
         // Check exists
-        if(file_exists(Constants::$path_public . '/' . $path)) {
+        if(file_exists(Constants::path_public . '/' . $path)) {
             // Set home
             self::$home = $path;
         } else {
@@ -68,7 +71,7 @@ class Routes {
         // Check set
         if(isset(self::$routes[self::$route])) {
             // Get file & path
-            $file = Constants::$path_public . '/' . self::$routes[self::$route];
+            $file = Constants::path_public . '/' . self::$routes[self::$route];
             // Check if exists
             if (file_exists($file)) {
                 require_once $file;
@@ -76,7 +79,7 @@ class Routes {
                 // Check home exists
                 if(isset(self::$home)) {
                     // Require home
-                    require_once Constants::$path_public . '/' . self::$home;
+                    require_once Constants::path_public . '/' . self::$home;
                 } else {
                     // Die
                     ErrorHandler::die(100, 'Home is not set, and file/route is not found.');
@@ -86,7 +89,7 @@ class Routes {
             // Check home exists
             if(isset(self::$home)) {
                 // Require home
-                require_once Constants::$path_public . '/' . self::$home;
+                require_once Constants::path_public . '/' . self::$home;
             } else {
                 // Die
                 ErrorHandler::die(100, 'Home is not set, and file/route is not found.');

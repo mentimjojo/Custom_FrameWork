@@ -1,5 +1,7 @@
 <?php
-class Constants {
+
+class Constants
+{
 
     /**
      * Debug for the whole project
@@ -11,21 +13,54 @@ class Constants {
      * Framework Version
      * @var string
      */
-    public static $fw_version = "0.00.001";
+    const fw_version = "0.00.001";
+
+    /**
+     * SSL disabled by default
+     * @var bool
+     */
+    public static $ssl = false;
 
     /**
      * Root path
      * Without /
      * @var string
      */
-    public static $path_root = __DIR__ . '/../../../..';
+    const path_root = __DIR__ . '/../../../..';
 
     /**
      * Path public
      * Without /
      * @var string
      */
-    public static $path_public = __DIR__ . '/../../../../public';
+    const path_public = __DIR__ . '/../../../../public';
+
+    /**
+     * Main url
+     * @var string
+     */
+    public static $url_root;
+
+    /**
+     * Constants constructor.
+     */
+    public function __construct()
+    {
+        // Get url
+        $this->getUrl();
+    }
+
+    /**
+     * Get url without parameters
+     */
+    private function getUrl()
+    {
+        // Get parts
+        $parts = explode('?', $_SERVER['REQUEST_URI'], 2);
+        // Get url
+        self::$url_root = "http://" . $_SERVER['HTTP_HOST'] . $parts[0];
+    }
 
 }
+
 ?>

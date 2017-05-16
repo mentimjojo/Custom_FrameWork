@@ -41,7 +41,7 @@ class AutoLoader {
      */
     public static function load(string $path){
         // Set path
-        $path = Constants::$path_public . '/' . $path;
+        $path = Constants::path_public . '/' . $path;
         // Scan path
         $scan = array_diff(scandir($path), array('.', '..'));
         // Foreach found item
@@ -65,7 +65,7 @@ class AutoLoader {
      */
     public function loadPublic(){
         // Load standard public
-        require_once Constants::$path_public . '/index.php';
+        require_once Constants::path_public . '/index.php';
     }
 
 }
