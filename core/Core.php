@@ -17,6 +17,14 @@ class Core
      */
     public function __construct()
     {
+        // Initialize framework
+        $this->initialize();
+    }
+
+    /**
+     * Initialize framework
+     */
+    private function initialize(){
         // Run AutoLoader
         $autoLoader = new AutoLoader(__DIR__);
         // Run config
