@@ -41,8 +41,8 @@ class Settings
     {
         // Check if enabled
         if (Constants::$ssl) {
-            if ($_SERVER["HTTPS"] != "on") {
-                Utils::$header->redirect(Constants::$url_root . '/' . $_SERVER["REQUEST_URI"], 0, true);
+            if (!isset($_SERVER["HTTPS"])) {
+                Utils::$header->redirect(Constants::$url_root . $_SERVER["REQUEST_URI"], 0, true);
             }
         }
     }

@@ -33,6 +33,8 @@ class Core
         new ErrorHandler();
         // Run routes
         new Routes();
+        // Run utils
+        new Utils();
         // Load public
         $autoLoader->loadPublic();
         // Load routes
