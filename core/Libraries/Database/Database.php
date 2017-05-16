@@ -126,7 +126,7 @@ class Database
      * @param string $query
      * @return mixed
      */
-    public function runQuery(string $query){
+    public function query(string $query){
         // Check if db engine exists
         if(isset($this->db_engine)) {
             // Create query
