@@ -8,12 +8,20 @@ class Utils{
     public static $header;
 
     /**
+     * Misc
+     * @var
+     */
+    public static $misc;
+
+    /**
      * Utils constructor.
      */
     public function __construct()
     {
         // Initialize header
         self::$header = new Header();
+        // Initialize misc
+        self::$misc = new Misc();
     }
 
 }

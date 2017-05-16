@@ -37,6 +37,9 @@ class Settings
         date_default_timezone_set($timeZone);
     }
 
+    /**
+     * Check ssl, when enabled, check url if ssl is being used.
+     */
     private static function checkSSL()
     {
         // Check if enabled

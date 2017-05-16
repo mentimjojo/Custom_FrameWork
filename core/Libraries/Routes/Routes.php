@@ -1,5 +1,7 @@
 <?php
-class Routes {
+
+class Routes
+{
 
     /**
      * Route
@@ -32,9 +34,10 @@ class Routes {
     /**
      * Get route from url
      */
-    private function getRoute(){
+    private function getRoute()
+    {
         // Check if route isset
-        if(isset($_GET['route'])) {
+        if (isset($_GET['route'])) {
             // Get route from URL
             self::$route = $_GET['route'];
         }
@@ -45,18 +48,27 @@ class Routes {
      * @param string $url
      * @param string $path
      */
-    public static function setRoute(string $url, string $path){
-        // Save route in array
-        self::$routes[$url] = $path;
+    public static function setRoute(string $url, string $path)
+    {
+        // Block chars
+        $block_chars = array('&', '#', '$', '^', '*', '(', ')', '\\', '|', ':', ';', ',', '.', '"', "'");
+        // Utils
+        if(!Utils::$misc->checkStringOnChars($url, $block_chars)) {
+            // Check if route is valid
+            self::$routes[$url] = $path;
+        } else {
+            ErrorHandler::warning(106, 'Route url contains not support chars. Chars allowed: /, -, _');
+        }
     }
 
     /**
      * Set home
      * @param string $path
      */
-    public static function setHome(string $path) {
+    public static function setHome(string $path)
+    {
         // Check exists
-        if(file_exists(Constants::path_public . '/' . $path)) {
+        if (file_exists(Constants::path_public . '/' . $path)) {
             // Set home
             self::$home = $path;
         } else {
@@ -67,9 +79,10 @@ class Routes {
     /**
      * Load system
      */
-    public static function load(){
+    public static function load()
+    {
         // Check set
-        if(isset(self::$routes[self::$route])) {
+        if (isset(self::$routes[self::$route])) {
             // Get file & path
             $file = Constants::path_public . '/' . self::$routes[self::$route];
             // Check if exists
@@ -77,7 +90,7 @@ class Routes {
                 require_once $file;
             } else {
                 // Check home exists
-                if(isset(self::$home)) {
+                if (isset(self::$home)) {
                     // Require home
                     require_once Constants::path_public . '/' . self::$home;
                 } else {
@@ -87,7 +100,7 @@ class Routes {
             }
         } else {
             // Check home exists
-            if(isset(self::$home)) {
+            if (isset(self::$home)) {
                 // Require home
                 require_once Constants::path_public . '/' . self::$home;
             } else {
@@ -98,4 +111,5 @@ class Routes {
     }
 
 }
+
 ?>
