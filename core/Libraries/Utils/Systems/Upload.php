@@ -7,118 +7,118 @@ class Upload
      * File(s) types allowed
      * @var array
      */
-    private static $file_types = array();
+    private $file_types = array();
 
     /**
      * Set minimal size of the file(s). Default is 0
      * Size in KB's
      * @var int
      */
-    private static $min_size = 0;
+    private $min_size = 0;
 
     /**
      * Max size of the file(s), default is 50MB
      * Size in KB's
      * @var int
      */
-    private static $max_size = 51200;
+    private $max_size = 52428800;
 
     /**
      * Set the minimal files to upload. Default is 0
      * @var int
      */
-    private static $min_files = 0;
+    private $min_files = 0;
 
     /**
      * Max files to upload. Default is 10
      * @var int
      */
-    private static $max_files = 10;
+    private $max_files = 10;
 
     /**
      * If user can upload multiple or not. Default is false
      * @var bool
      */
-    private static $multiple = false;
+    private $multiple = false;
 
     /**
      * The upload path
      * @var string
      */
-    private static $upload_path;
+    private $upload_path;
 
     /**
      * Set path where to upload the files to. Path is automatically inside public folder.
      * @param string $path
      */
-    public static function setUploadPath(string $path)
+    public function setUploadPath(string $path)
     {
         // Set path to upload. Path is automatically in public folder
-        self::$upload_path = Constants::path_public . '/' . $path;
+        $this->upload_path = Constants::path_public . '/' . $path;
     }
 
     /**
      * Set the minimum size of the file(s)
      * @param int $size
      */
-    public static function setMinSize(int $size = 50)
+    public function setMinSize(int $size = 50)
     {
-        // Set max size
-        self::$min_size = $size * 1024;
+        // Set min size
+        $this->min_size = $size * 1048576;
     }
 
     /**
      * Set the maximum size of the file(s)
      * @param int $size
      */
-    public static function setMaxSize(int $size = 50)
+    public function setMaxSize(int $size = 50)
     {
         // Set max size
-        self::$max_size = $size * 1024;
+        $this->max_size = $size * 1048576;
     }
 
     /**
      * Set the minimum count of files.
      * @param int $min
      */
-    public static function setMinFiles(int $min = 0)
+    public function setMinFiles(int $min = 0)
     {
-        // Set max files
-        self::$min_files = $min;
+        // Set min files
+        $this->min_files = $min;
     }
 
     /**
      * Set the maximum count of files.
      * @param int $max
      */
-    public static function setMaxFiles(int $max = 10)
+    public function setMaxFiles(int $max = 10)
     {
         // Set max files
-        self::$max_files = $max;
+        $this->max_files = $max;
     }
 
     /**
      * Set the file types allowed.
      * @param array $types
      */
-    public static function setFileTypes(array $types)
+    public function setFileTypes(array $types)
     {
         // Fix uppercase letters
         foreach ($types as $type) {
             $types[] = strtolower($type);
         }
         // Set the file types
-        self::$file_types = $types;
+        $this->file_types = $types;
     }
 
     /**
      * Set if user can upload multiple files at the same time or not.
      * @param bool $toggle
      */
-    public static function multiple(bool $toggle = false)
+    public function setMultiple(bool $toggle = false)
     {
         // Set multiple files or not
-        self::$multiple = $toggle;
+        $this->multiple = $toggle;
     }
 
     /**
@@ -126,13 +126,13 @@ class Upload
      * @param array $upload
      * @return stdClass
      */
-    public static function send(array $upload)
+    public function send(array $upload)
     {
         // Check multiple
-        if(self::$multiple){
-            $return = self::upload_multiple($upload);
+        if ($this->multiple) {
+            $return = $this->upload_multiple($upload);
         } else {
-            $return = self::upload_one($upload);
+            $return = $this->upload_one($upload);
         }
         // Return array
         return $return;
@@ -143,24 +143,24 @@ class Upload
      * @param array $file
      * @return stdClass
      */
-    private static function upload_one(array $file): stdClass
+    private function upload_one(array $file): stdClass
     {
         // Make file object
         $file = (object)$file;
         // Target name
         $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
         // Target file
-        $target_file = self::$upload_path . '/' . $target_name;
+        $target_file = $this->upload_path . '/' . $target_name;
         // Get file type
-        $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+        $target_type = pathinfo($target_file, PATHINFO_EXTENSION);
         // Check exists first
         if (!file_exists($target_file)) {
             // Check if file type is allowed
-            if (in_array($target_type, self::$file_types)) {
+            if (in_array($target_type, $this->file_types)) {
                 // Check file size to big
-                if ($file->size <= self::$max_size) {
+                if ($file->size <= $this->max_size) {
                     // Check file size to small
-                    if ($file->size >= self::$min_size) {
+                    if ($file->size >= $this->min_size) {
                         // Move file to location
                         if (move_uploaded_file($file->tmp_name, $target_file)) {
                             // Set return
@@ -198,12 +198,12 @@ class Upload
      * @param array $files
      * @return stdClass
      */
-    private static function upload_multiple(array $files): stdClass
+    private function upload_multiple(array $files): stdClass
     {
         // Original files
         $original_files = array();
         // Re-array files
-        $files = self::reArrayFiles($files);
+        $files = $this->reArrayFiles($files);
         // Set return null
         $return = array();
         // Foreach file
@@ -213,17 +213,17 @@ class Upload
             // Target name
             $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
             // Target file
-            $target_file = self::$upload_path . '/' . $target_name;
+            $target_file = $this->upload_path . '/' . $target_name;
             // Get file type
             $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
             // Check exists first
             if (!file_exists($target_file)) {
                 // Check if file type is allowed
-                if (in_array($target_type, self::$file_types)) {
+                if (in_array($target_type, $this->file_types)) {
                     // Check file size to big
-                    if ($file->size <= self::$max_size) {
+                    if ($file->size <= $this->max_size) {
                         // Check file size to small
-                        if ($file->size >= self::$min_size) {
+                        if ($file->size >= $this->min_size) {
                             // Move file to location
                             if (move_uploaded_file($file->tmp_name, $target_file)) {
                                 // Set in array
@@ -268,7 +268,7 @@ class Upload
      * @param array $file_post files
      * @return array the array
      */
-    private static function reArrayFiles(array &$file_post): array
+    private function reArrayFiles(array &$file_post): array
     {
         // Create array
         $file_ary = array();
