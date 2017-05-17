@@ -8,10 +8,11 @@ DirectoryIndex framework.php
 
 # Rewrite Cond
 RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-l
 RewriteCond %{REQUEST_FILENAME} !-d
 
 # Get and set page in variable
-RewriteRule ^(.*) framework.php?route=$1 [L]
+RewriteRule ^(.*) framework.php?route=$1 [NC,L]
 
 ## UNTIL HERE IS PART OF FRAMEWORK ##
 

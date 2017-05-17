@@ -18,10 +18,11 @@ class ErrorHandler
      * @param string $message
      */
     public static function warning(int $code, string $message){
+        echo 'ho';
         // Check debug
         if (Constants::$debug) {
             // Get error template
-            $template = file_get_contents(__DIR__ . '/Template/Warning_Template_Debug.html');
+            $template = file_get_contents(Constants::path_resources . '/Templates/Warning_Template_Debug.html');
             // Replace error code
             $template = str_replace('{Error_Code}', $code, $template);
             // Replace error message
@@ -32,7 +33,7 @@ class ErrorHandler
             // Error message
             $error = "Warning: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::path_root.'/logs/errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
     }
 
@@ -46,13 +47,18 @@ class ErrorHandler
         // Check debug
         if (Constants::$debug) {
             // Get error template
-            $template = file_get_contents(__DIR__ . '/Template/Error_Template_Debug.html');
+            $template = file_get_contents(Constants::path_resources . '/Templates/Error_Template_Debug.html');
             // Replace error code
             $template = str_replace('{Error_Code}', $code, $template);
             // Replace error message
             $template = str_replace("{Error_Message}", $message, $template);
         } else {
-            $template = file_get_contents(__DIR__ . '/Template/Error_Template.html');
+            // Template
+            $template = file_get_contents(Constants::path_resources . '/Templates/Error_Template.html');
+            // Error message
+            $error = "Fatal error: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
+            // Save error in file
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
         // Die site with template
         die($template);
@@ -70,7 +76,7 @@ class ErrorHandler
         // Report error when debug is enabled.
         if(Constants::$debug){
             // Get error template
-            $template = file_get_contents(__DIR__ . '/Template/Warning_Message.html');
+            $template = file_get_contents(Constants::path_resources . '/Templates/Warning_Message.html');
             // Replace error code
             $template = str_replace('{Error_Code}', $errno, $template);
             // Replace error message
@@ -83,9 +89,9 @@ class ErrorHandler
             echo $template;
         } else {
             // Error message
-            $error = "Error: " .date('H:i:s', time()) . " - Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
+            $error = "Fatal error: " .date('H:i:s', time()) . " - Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::path_root.'/logs/errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
     }
 
