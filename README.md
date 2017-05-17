@@ -1,8 +1,9 @@
 # Custom_FrameWork
 Framework
 
-# Author
-Developer T.Nijborg
+# Contributors
+ * T.Nijborg - Founder
+ * R.Bruil - Developer
 
 # Documentation
 There is a large documentation availble on Google drive. 
