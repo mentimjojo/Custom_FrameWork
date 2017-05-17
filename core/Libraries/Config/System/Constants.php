@@ -62,8 +62,6 @@ class Constants
      */
     private function getUrl()
     {
-        // Get parts
-        $parts = explode('?', $_SERVER['REQUEST_URI'], 2);
         // Get url, without / on the end
         self::$url_root = "http://" . $_SERVER['HTTP_HOST'];
     }

@@ -46,6 +46,21 @@ class Mail
     private $headers;
 
     /**
+     * Mail template
+     * @var string
+     */
+    private $template = 'Mail_Template.html';
+
+    /**
+     * Set template of the mail, default is Mail_Template.html
+     * @param string $template
+     */
+    public function setTemplate(string $template = 'Mail_Template.html'){
+        // Set template
+        $this->template = $template;
+    }
+
+    /**
      * Set sender of the mail
      * @param string $sender_name
      * @param string $sender_email
@@ -137,7 +152,7 @@ class Mail
         // From
         $this->headers[] = "From: " . $this->sender->name . " <" . $this->sender->email . ">";
         // To
-        $this->headers[] = "To: ".$this->receiver->name." <" . $this->receiver->email . ">";
+        $this->headers[] = "To: " . $this->receiver->name . " <" . $this->receiver->email . ">";
         // CC
         if (!empty($this->cc->email)) {
             $this->headers[] = "Cc: " . $this->cc->name . " <" . $this->cc->email . ">";
@@ -150,16 +165,39 @@ class Mail
         $this->headers[] = "X-Mailer: PHP/" . phpversion();
     }
 
-
-    public function send(){
+    /**
+     * Send the mail
+     * @return stdClass
+     */
+    public function send() : stdClass
+    {
         // Check if all set
-        if(isset($this->receiver)){
-            if(isset($this->sender)){
-                if(isset($this->subject)){
-                    if(isset($this->message)){
-                        // Set headers ready
-                        $this->setHeaders();
-
+        if (isset($this->receiver)) {
+            if (isset($this->sender)) {
+                if (isset($this->subject)) {
+                    if (isset($this->message)) {
+                        if(file_exists(Constants::path_resources.'/Templates/' . $this->template)) {
+                            // Set headers ready
+                            $this->setHeaders();
+                            // Get mail template
+                            $mail_temp = file_get_contents(Constants::path_resources . '/Templates/' . $this->template);
+                            // Replace message
+                            $mail_temp = str_replace('{message}', $this->message, $mail_temp);
+                            // Try sending
+                            try {
+                                // Send mail
+                                mail($this->receiver->email, $this->subject, $mail_temp, implode("\r\n", $this->headers));
+                                // Return
+                                $return = array('status' => true, 'message' => 'Mail successfully send.');
+                            } catch (Exception $ex) {
+                                // Throw warning
+                                ErrorHandler::warning(108, 'Email could not be send.');
+                                // Return
+                                $return = array('status' => false, 'message' => 'Email could not be send.');
+                            }
+                        } else {
+                            $return = array('status' => false, 'message' => "Mail template doesn't exists");
+                        }
                     } else {
                         $return = array('status' => false, 'message' => 'No message filled in');
                     }
@@ -172,6 +210,8 @@ class Mail
         } else {
             $return = array('status' => false, 'message' => 'No receiver filled in');
         }
+        // Return
+        return (object) $return;
     }
 
 }
