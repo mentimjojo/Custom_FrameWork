@@ -29,18 +29,18 @@ class Constants
     const path_root = __DIR__ . '/../../../..';
 
     /**
-     * Path core
-     * Without /
-     * @var string
-     */
-    const path_resources = __DIR__ . '/../../../Resources';
-
-    /**
      * Path public
      * Without /
      * @var string
      */
     const path_public = __DIR__ . '/../../../../public';
+
+    /**
+     * Path core
+     * Without /
+     * @var string
+     */
+    const path_resources = __DIR__ . '/../../../Resources';
 
     /**
      * Main url

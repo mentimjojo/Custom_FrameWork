@@ -117,7 +117,7 @@ class Mail
     }
 
     /**
-     * Set subject of the message
+     * Set subject of the mail
      * @param string $subject
      */
     public function setSubject(string $subject)
@@ -188,27 +188,32 @@ class Mail
                                 // Send mail
                                 mail($this->receiver->email, $this->subject, $mail_temp, implode("\r\n", $this->headers));
                                 // Return
-                                $return = array('status' => true, 'message' => 'Mail successfully send.');
+                                $return = array('status' => true, 'message' => 'success');
                             } catch (Exception $ex) {
                                 // Throw warning
-                                ErrorHandler::warning(108, 'Email could not be send.');
+                                ErrorHandler::warning(108, 'error_unknown');
                                 // Return
-                                $return = array('status' => false, 'message' => 'Email could not be send.');
+                                $return = array('status' => false, 'message' => 'error_unknown');
                             }
                         } else {
-                            $return = array('status' => false, 'message' => "Mail template doesn't exists");
+                            // Set return
+                            $return = array('status' => false, 'message' => "error_mail_template");
                         }
                     } else {
-                        $return = array('status' => false, 'message' => 'No message filled in');
+                        // Set return
+                        $return = array('status' => false, 'message' => 'error_no_message');
                     }
                 } else {
-                    $return = array('status' => false, 'message' => 'No subject filled in');
+                    // Set return
+                    $return = array('status' => false, 'message' => 'error_no_subject');
                 }
             } else {
-                $return = array('status' => false, 'message' => 'No sender filled in');
+                // Set return
+                $return = array('status' => false, 'message' => 'error_no_sender');
             }
         } else {
-            $return = array('status' => false, 'message' => 'No receiver filled in');
+            // Set return
+            $return = array('status' => false, 'message' => 'error_no_receiver');
         }
         // Return
         return (object) $return;
