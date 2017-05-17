@@ -11,14 +11,14 @@ class Upload
 
     /**
      * Set minimal size of the file(s). Default is 0
-     * Size in KB's
+     * Size in Bytes
      * @var int
      */
     private $min_size = 0;
 
     /**
      * Max size of the file(s), default is 50MB
-     * Size in KB's
+     * Size in Bytes
      * @var int
      */
     private $max_size = 52428800;
@@ -59,7 +59,7 @@ class Upload
 
     /**
      * Set the minimum size of the file(s)
-     * @param int $size
+     * @param int $size in MB's
      */
     public function setMinSize(int $size = 50)
     {
@@ -69,7 +69,7 @@ class Upload
 
     /**
      * Set the maximum size of the file(s)
-     * @param int $size
+     * @param int $size in MB's
      */
     public function setMaxSize(int $size = 50)
     {
