@@ -4,20 +4,20 @@ class Settings
 {
 
     /**
-     * Set debug
+     * Toggle debug
      * @param bool $toggle
      */
-    public static function setDebug(bool $toggle)
+    public static function toggleDebug(bool $toggle)
     {
         // Update Debug
         Constants::$debug = $toggle;
     }
 
     /**
-     * Set SSL
+     * Toggle SSL, when enabled system will force SSL
      * @param bool $toggle
      */
-    public static function setSSL(bool $toggle)
+    public static function toggleSSL(bool $toggle)
     {
         // Update SSL
         Constants::$ssl = $toggle;

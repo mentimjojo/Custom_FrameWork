@@ -9,9 +9,21 @@ class Utils{
 
     /**
      * Misc
-     * @var
+     * @var Misc
      */
     public static $misc;
+
+    /**
+     * Mail system
+     * @var Mail
+     */
+    public static $mail;
+
+    /**
+     * Upload system
+     * @var Upload
+     */
+    public static $upload;
 
     /**
      * Utils constructor.
@@ -22,6 +34,10 @@ class Utils{
         self::$header = new Header();
         // Initialize misc
         self::$misc = new Misc();
+        // Initialize mail
+        self::$mail = new Mail();
+        // Initialize upload
+        self::$upload = new Upload();
     }
 
 }

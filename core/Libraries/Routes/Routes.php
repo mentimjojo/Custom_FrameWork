@@ -44,11 +44,11 @@ class Routes
     }
 
     /**
-     * Set route
+     * create route
      * @param string $url
      * @param string $path
      */
-    public static function setRoute(string $url, string $path)
+    public static function create(string $url, string $path)
     {
         // Block chars
         $block_chars = array('&', '#', '$', '^', '*', '(', ')', '\\', '|', ':', ';', ',', '.', '"', "'");
@@ -57,7 +57,7 @@ class Routes
             // Check if route is valid
             self::$routes[$url] = $path;
         } else {
-            ErrorHandler::warning(106, 'Route url contains not support chars. Chars allowed: /, -, _');
+            ErrorHandler::warning(106, 'Route url contains not supported chars. Chars allowed: /, -, _');
         }
     }
 
