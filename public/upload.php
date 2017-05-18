@@ -2,12 +2,12 @@
     <?php
     if(isset($_POST['submitOne'])){
         // Upload
-        Utils::$upload->setUploadPath('upload');
-        Utils::$upload->setMaxSize(100);
-        Utils::$upload->setMaxFiles(1);
-        Utils::$upload->setFileTypes(array('pdf', 'jpg', 'png'));
-        Utils::$upload->setMultiple(false);
-        $up = Utils::$upload->send($_FILES['file']);
+        Utils::$files->upload->setUploadPath('upload');
+        Utils::$files->upload->setMaxSize(100);
+        Utils::$files->upload->setMaxFiles(1);
+        Utils::$files->upload->setFileTypes(array('pdf', 'jpg', 'png'));
+        Utils::$files->upload->setMultiple(false);
+        $up = Utils::$files->upload->send($_FILES['file']);
 
         var_dump($up);
     }
@@ -20,14 +20,15 @@
     <?php
     if(isset($_POST['submitMultiple'])){
         // Upload
-        Utils::$upload->setUploadPath('upload');
-        Utils::$upload->setMaxSize(100);
-        Utils::$upload->setMaxFiles(5);
-        Utils::$upload->setFileTypes(array('pdf', 'jpg', 'png'));
-        Utils::$upload->setMultiple(true);
-        $up = Utils::$upload->send($_FILES['files']);
+        Utils::$files->upload->setUploadPath('upload');
+        Utils::$files->upload->setMaxSize(100);
+        Utils::$files->upload->setMaxFiles(5);
+        Utils::$files->upload->setFileTypes(array('pdf', 'jpg', 'png'));
+        Utils::$files->upload->setMultiple(true);
+        //$up = Utils::$files->upload->send($_FILES['files']);
 
-        var_dump($up);
+        var_dump(count($_FILES['files']['name']));
+        //var_dump($up);
     }
     ?>
     Multiple

@@ -220,31 +220,43 @@ class Upload
             if (!file_exists($target_file)) {
                 // Check if file type is allowed
                 if (in_array($target_type, $this->file_types)) {
-                    // Check file size to big
-                    if ($file->size <= $this->max_size) {
-                        // Check file size to small
-                        if ($file->size >= $this->min_size) {
-                            // Move file to location
-                            if (move_uploaded_file($file->tmp_name, $target_file)) {
-                                // Set in array
-                                array_push($original_files, array(
-                                    'name' => $file->name,
-                                    'target_name' => $target_name,
-                                    'size' => $file->size
-                                ));
-                                // Set return
-                                $return = array('status' => true, 'message' => 'success');
+                    // Check not minimum count
+                    if (count($files['name']) >= $this->min_files) {
+                        // Check not maximum count
+                        if (count($files['name']) <= $this->max_files) {
+                            // Check file size to big
+                            if ($file->size <= $this->max_size) {
+                                // Check file size to small
+                                if ($file->size >= $this->min_size) {
+                                    // Move file to location
+                                    if (move_uploaded_file($file->tmp_name, $target_file)) {
+                                        // Set in array
+                                        array_push($original_files, array(
+                                            'name' => $file->name,
+                                            'target_name' => $target_name,
+                                            'size' => $file->size
+                                        ));
+                                        // Set return
+                                        $return = array('status' => true, 'message' => 'success');
+                                    } else {
+                                        // Set return
+                                        $return = array('status' => false, 'message' => 'error_unknown');
+                                    }
+                                } else {
+                                    // Set return
+                                    $return = array('status' => false, 'message' => 'error_file_to_small');
+                                }
                             } else {
                                 // Set return
-                                $return = array('status' => false, 'message' => 'error_unknown');
+                                $return = array('status' => false, 'message' => 'error_file_to_big');
                             }
                         } else {
                             // Set return
-                            $return = array('status' => false, 'message' => 'error_file_to_small');
+                            $return = array('status' => false, 'message' => 'error_file_maximum_count');
                         }
                     } else {
                         // Set return
-                        $return = array('status' => false, 'message' => 'error_file_to_big');
+                        $return = array('status' => false, 'message' => 'error_file_minimum_count');
                     }
                 } else {
                     // Set return
@@ -268,7 +280,8 @@ class Upload
      * @param array $file_post files
      * @return array the array
      */
-    private function reArrayFiles(array &$file_post): array
+    private
+    function reArrayFiles(array &$file_post): array
     {
         // Create array
         $file_ary = array();

@@ -21,9 +21,9 @@ class Utils{
 
     /**
      * Upload system
-     * @var Upload
+     * @var array
      */
-    public static $upload;
+    public static $files = array();
 
     /**
      * Utils constructor.
@@ -37,7 +37,9 @@ class Utils{
         // Initialize mail
         self::$mail = new Mail();
         // Initialize upload
-        self::$upload = new Upload();
+        self::$files = (object) array(
+            'upload' => new Upload()
+        );
     }
 
 }
