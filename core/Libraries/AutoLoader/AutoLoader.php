@@ -41,7 +41,7 @@ class AutoLoader {
      */
     public static function load(string $path){
         // Remove constants path
-        $path = str_replace(Constants::path_public, '', $path);
+        $path = str_replace(Constants::path_public . '/', '', $path);
         // Set path
         $path = Constants::path_public . '/' . $path;
         // Scan path
