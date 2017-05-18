@@ -6,7 +6,10 @@
 require_once __DIR__ . '/Libraries/AutoLoader/AutoLoader.php';
 
 /**
- * Created by T.Nijborg
+ * Core class of the framework
+ * @Author T.Nijborg
+ * @Version 0.1.1
+ * @Since 0.1
  * Class Core
  */
 class Core

@@ -25,10 +25,9 @@
         Utils::$files->upload->setMaxFiles(5);
         Utils::$files->upload->setFileTypes(array('pdf', 'jpg', 'png'));
         Utils::$files->upload->setMultiple(true);
-        //$up = Utils::$files->upload->send($_FILES['files']);
+        $up = Utils::$files->upload->send($_FILES['files']);
 
-        var_dump(count($_FILES['files']['name']));
-        //var_dump($up);
+        var_dump($up);
     }
     ?>
     Multiple

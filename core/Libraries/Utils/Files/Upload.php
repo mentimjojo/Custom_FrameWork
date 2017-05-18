@@ -202,28 +202,28 @@ class Upload
     {
         // Original files
         $original_files = array();
-        // Re-array files
-        $files = $this->reArrayFiles($files);
-        // Set return null
-        $return = array();
-        // Foreach file
-        foreach ($files as $file) {
-            // Set file as object
-            $file = (object)$file;
-            // Target name
-            $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
-            // Target file
-            $target_file = $this->upload_path . '/' . $target_name;
-            // Get file type
-            $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
-            // Check exists first
-            if (!file_exists($target_file)) {
-                // Check if file type is allowed
-                if (in_array($target_type, $this->file_types)) {
-                    // Check not minimum count
-                    if (count($files['name']) >= $this->min_files) {
-                        // Check not maximum count
-                        if (count($files['name']) <= $this->max_files) {
+        // Check not minimum count
+        if (count($files['name']) >= $this->min_files) {
+            // Check not maximum count
+            if (count($files['name']) <= $this->max_files) {
+                // Re-array files
+                $files = $this->reArrayFiles($files);
+                // Set return null
+                $return = array();
+                // Foreach file
+                foreach ($files as $file) {
+                    // Set file as object
+                    $file = (object)$file;
+                    // Target name
+                    $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
+                    // Target file
+                    $target_file = $this->upload_path . '/' . $target_name;
+                    // Get file type
+                    $target_type = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
+                    // Check exists first
+                    if (!file_exists($target_file)) {
+                        // Check if file type is allowed
+                        if (in_array($target_type, $this->file_types)) {
                             // Check file size to big
                             if ($file->size <= $this->max_size) {
                                 // Check file size to small
@@ -252,20 +252,20 @@ class Upload
                             }
                         } else {
                             // Set return
-                            $return = array('status' => false, 'message' => 'error_file_maximum_count');
+                            $return = array('status' => false, 'message' => 'error_file_type');
                         }
                     } else {
                         // Set return
-                        $return = array('status' => false, 'message' => 'error_file_minimum_count');
+                        $return = array('status' => false, 'message' => 'error_file_exists');
                     }
-                } else {
-                    // Set return
-                    $return = array('status' => false, 'message' => 'error_file_type');
                 }
             } else {
                 // Set return
-                $return = array('status' => false, 'message' => 'error_file_exists');
+                $return = array('status' => false, 'message' => 'error_file_maximum_count');
             }
+        } else {
+            // Set return
+            $return = array('status' => false, 'message' => 'error_file_minimum_count');
         }
         // Check if set
         if (!empty($original_files)) {

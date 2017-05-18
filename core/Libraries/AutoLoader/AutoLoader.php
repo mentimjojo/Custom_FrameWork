@@ -24,7 +24,7 @@ class AutoLoader {
         foreach ($scan as $item){
             // Check if item is a file
             if(substr($item, -4) == ".php") {
-                // Require file
+                // Require file once
                 require_once $path . '/' . $item;
             } else if(substr($item, -5) == ".html"){
                 // Ignore
@@ -54,7 +54,7 @@ class AutoLoader {
                 // Ignore
             } else {
                 // Rerun autoload on new folder
-                self::autoload($path . '/' . $item);
+                self::load($path . '/' . $item);
             }
         }
     }
