@@ -40,6 +40,7 @@ class AutoLoader {
      * @param string $path
      */
     public static function load(string $path){
+        $path = str_replace(Constants::path_public, '', $path);
         // Set path
         $path = Constants::path_public . '/' . $path;
         // Scan path
