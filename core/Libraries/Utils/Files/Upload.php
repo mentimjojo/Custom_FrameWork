@@ -212,6 +212,14 @@ class Upload
                 $return = array();
                 // Foreach file
                 foreach ($files as $file) {
+                    // Check return empty
+                    if(!empty($return)){
+                        // Check if error happened
+                        if(!$return['status']) {
+                            // Break foreach
+                            break;
+                        }
+                    }
                     // Set file as object
                     $file = (object)$file;
                     // Target name

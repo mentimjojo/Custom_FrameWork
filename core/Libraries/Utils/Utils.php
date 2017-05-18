@@ -38,7 +38,8 @@ class Utils{
         self::$mail = new Mail();
         // Initialize upload
         self::$files = (object) array(
-            'upload' => new Upload()
+            'upload' => new Upload(),
+            'download' => new download()
         );
     }
 

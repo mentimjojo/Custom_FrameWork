@@ -20,8 +20,20 @@ class Core
      */
     public function __construct()
     {
+        // Startup
+        $this->startup();
         // Initialize framework
         $this->initialize();
+    }
+
+    /**
+     * Startup some needed PHP features
+     */
+    private function startup(){
+        // Start ob
+        ob_start();
+        // Start sessions
+        session_start();
     }
 
     /**
