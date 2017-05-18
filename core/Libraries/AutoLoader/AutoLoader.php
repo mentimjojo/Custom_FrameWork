@@ -19,7 +19,7 @@ class AutoLoader {
      */
     private function internalLoad(string $path){
         // Scan path
-        $scan = array_diff(scandir($path), array('.', '..', 'Core.php', 'Error_Template.php'));
+        $scan = array_diff(scandir($path), array('.', '..', 'Core.php', 'Resources'));
         // Foreach found item
         foreach ($scan as $item){
             // Check if item is a file
@@ -40,6 +40,7 @@ class AutoLoader {
      * @param string $path
      */
     public static function load(string $path){
+        // Remove constants path
         $path = str_replace(Constants::path_public, '', $path);
         // Set path
         $path = Constants::path_public . '/' . $path;
