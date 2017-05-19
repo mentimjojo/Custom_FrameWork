@@ -66,15 +66,18 @@ class Session {
                 if (!isset($_SESSION[$this->session_name])) {
                     // Set session
                     $_SESSION[$this->session_name] = $this->session_value;
+                    // Set return
                     $return = array('status' => true, 'message' => 'success');
                 } else {
                     // Throw error
                     $return = array('status' => false, 'message' => 'error_duplicate_name');
                 }
             } else {
+                // Set return
                 $return = array('status' => false, 'message' => 'error_empty_value');
             }
         } else {
+            // Set return
             $return = array('status' => false, 'message' => 'error_empty_name');
         }
         // Return
