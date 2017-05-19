@@ -38,14 +38,18 @@ class AutoLoader {
     /**
      * AutoLoad files
      * @param string $path
+     * @param array $filter set the filter
      */
-    public static function load(string $path){
+    public static function load(string $path, array $filter = array()){
+        // Setup filters
+        $filter[] = '.';
+        $filter[] = '..';
         // Remove constants path
         $path = str_replace(Constants::path_public . '/', '', $path);
         // Set path
         $path = Constants::path_public . '/' . $path;
         // Scan path
-        $scan = array_diff(scandir($path), array('.', '..'));
+        $scan = array_diff(scandir($path), $filter);
         // Foreach found item
         foreach ($scan as $item){
             // Check if item is a file
