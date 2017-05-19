@@ -49,6 +49,12 @@ class Constants
     public static $url_root;
 
     /**
+     * Public url
+     * @var string
+     */
+    public static $url_public;
+
+    /**
      * Constants constructor.
      */
     public function __construct()
@@ -64,6 +70,8 @@ class Constants
     {
         // Get url, without / on the end
         self::$url_root = "http://" . $_SERVER['HTTP_HOST'];
+        // Set url with public, without / on the end
+        self::$url_public = self::$url_root . '/public';
     }
 
 }

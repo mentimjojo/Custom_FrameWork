@@ -21,8 +21,6 @@ class Settings
     {
         // Update SSL
         Constants::$ssl = $toggle;
-        // Update SSL in url
-        Constants::$url_root = str_replace('http://', 'https://', Constants::$url_root);
         // Check ssl
         self::checkSSL();
     }
@@ -44,6 +42,11 @@ class Settings
     {
         // Check if enabled
         if (Constants::$ssl) {
+            // Update SSL in root url
+            Constants::$url_root = str_replace('http://', 'https://', Constants::$url_root);
+            // Update SSL in public url
+            Constants::$url_public = str_replace('http://', 'https://', Constants::$url_public);
+            // Redirect if needed
             if (!isset($_SERVER["HTTPS"])) {
                 Utils::$header->redirect(Constants::$url_root . $_SERVER["REQUEST_URI"], 0, true);
             }
