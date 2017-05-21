@@ -106,7 +106,7 @@ class Updater
                     // Send error
                     ErrorHandler::warning(500, 'Something went wrong while trying to download the new framework version <br/> Error: ' . curl_errno($curl) . curl_error($curl));
                     // Send error
-                    $return = array('status' => false, 'message' => 'Error, see log.');
+                    $return = array('status' => false, 'message' => 'update_error_see_log');
                 } else {
                     // Destination
                     $destination = Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip';
@@ -117,17 +117,17 @@ class Updater
                     // Close
                     fclose($file);
                     // Send error
-                    $return = array('status' => true, 'message' => 'Download successfully.');
+                    $return = array('status' => true, 'message' => 'download_success');
                 }
             } catch (Exception $ex) {
                 // Send error
                 ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions, error: ' . $ex->getMessage());
                 // Send error
-                $return = array('status' => false, 'message' => 'Error, see log.');
+                $return = array('status' => false, 'message' => 'update_error_see_log');
             }
         } else {
             // Set return
-            $return = array('status' => false, 'message' => 'No update needed');
+            $return = array('status' => false, 'message' => 'update_not_needed');
         }
         // Return
         return (object)$return;
@@ -142,10 +142,10 @@ class Updater
         // Check if needed
         if (self::$need_update) {
             // Set return
-            $return = array('status' => true, 'message' => 'Update available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
+            $return = array('status' => true, 'message' => 'update_available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
         } else {
             // Set return
-            $return = array('status' => false, 'message' => 'No update needed');
+            $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version,  'latest_version' => self::$last_version);
         }
         // Return
         return (object)$return;
@@ -172,18 +172,18 @@ class Updater
                     // Close zip/update
                     $update->close();
                     // Set return
-                    $return = array('status' => true, 'message' => "Update installed");
+                    $return = array('status' => true, 'message' => "update_installed");
                 } else {
                     // Set return
-                    $return = array('status' => false, 'message' => "Update failed. Update couldn't be opened.");
+                    $return = array('status' => false, 'message' => 'update_failed', 'error' => 'Update could not be opened.');
                 }
             } else {
                 // Set return
-                $return = array('status' => false, 'message' => 'Update failed. Error: ' . $download->message);
+                $return = array('status' => false, 'message' => 'update_failed', 'error' => $download->message);
             }
         } else {
             // Set return
-            $return = array('status' => false, 'message' => 'No update needed');
+            $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version,  'latest_version' => self::$last_version);
         }
         // Return update
         return (object) $return;
