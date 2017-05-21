@@ -229,6 +229,8 @@ class Updater
                         $update->extractTo(Constants::path_root);
                         // Close zip/update
                         $update->close();
+                        // Update installed, now remove it
+                        unlink(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip');
                         // Set return
                         $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
                     } else {
