@@ -9,7 +9,7 @@ class Config {
         // Check startup complete
         if(!Constants::$startup_complete){
             // Enable debug for now
-            Settings::toggleDebug(false);
+            Settings::toggleDebug(true);
         }
         // Set timezone to Netherlands (Because developer lives there)
         settings::setTimezone();
