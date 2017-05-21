@@ -7,13 +7,14 @@ class Constants
      * Debug for the whole project
      * @var bool
      */
-    public static $debug = false;
+    public static $debug = true;
 
     /**
      * Framework Version
+     * DO NOT EDIT THIS. DANGER DANGER DANGER. ONLY A IDIOT WOULD EDIT THIS.
      * @var string
      */
-    const fw_version = "0.1.134";
+    public static $fw_version = "0.1.134";
 
     /**
      * SSL disabled by default
@@ -53,6 +54,12 @@ class Constants
      * @var string
      */
     public static $url_public;
+
+    /**
+     * The updater url
+     * @var string
+     */
+    const updater_url = 'https://fw-system.timnijborg.com';
 
     /**
      * Constants constructor.
