@@ -10,6 +10,12 @@ class Updater
     private static $last_version;
 
     /**
+     * Last changelog
+     * @var string
+     */
+    private static $changelog;
+
+    /**
      * Boolean if update needed
      * @var
      */
@@ -33,9 +39,12 @@ class Updater
     private function getLastVersion()
     {
         // Get last version
-        $lastVersionUrl = Constants::updater_url . "/config/version.php";
+        $lastVersionUrl = Constants::updater_url . "/versions/releases.php";
         // Try
         try {
+            /**
+             * Get version
+             */
             // Startup curl
             $curl = curl_init();
             // Set url
@@ -47,7 +56,7 @@ class Updater
             // Get version
             $versions = curl_exec($curl);
             // Check if empty
-            if (empty($versions)) {
+            if (empty($versions) || strpos($versions, 'Not Found') !== false) {
                 // Send error
                 ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions <br/> Error: ' . curl_errno($curl) . curl_error($curl));
             } else {
@@ -61,6 +70,27 @@ class Updater
                 }
                 // Set last version
                 self::$last_version = $last;
+            }
+
+            /**
+             * Get changelog
+             */
+            // Startup curl
+            $curl = curl_init();
+            // Set url
+            curl_setopt($curl, CURLOPT_URL, Constants::updater_url . '/changelogs/fw-' . self::$last_version . '.txt');
+            // Set return
+            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+            // Set ssl false
+            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+            // Changelog
+            $changelog = curl_exec($curl);
+            // Check if empty or not exists
+            if (empty($changelog) || strpos($changelog, 'Not Found') !== false) {
+                // Do nothing
+            } else {
+                // Save changelog
+                self::$changelog = $changelog;
             }
         } catch (Exception $ex) {
             // Send error
@@ -86,53 +116,59 @@ class Updater
      */
     private static function downloadUpdate(): stdClass
     {
-        if (self::$need_update) {
-            // Get url
-            $download_url = Constants::updater_url . '/releases/fw-' . self::$last_version . '.zip';
-            // Try
-            try {
-                // Startup curl
-                $curl = curl_init();
-                // Set url
-                curl_setopt($curl, CURLOPT_URL, $download_url);
-                // Set return
-                curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                // Set ssl false
-                curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                // Get download
-                $download = curl_exec($curl);
-                // Check if empty
-                if (empty($download)) {
+        // Check if version is pulled
+        if (!empty(self::$last_version)) {
+            // Check if update needed
+            if (self::$need_update) {
+                // Get url
+                $download_url = Constants::updater_url . '/releases/fw-' . self::$last_version . '.zip';
+                // Try
+                try {
+                    // Startup curl
+                    $curl = curl_init();
+                    // Set url
+                    curl_setopt($curl, CURLOPT_URL, $download_url);
+                    // Set return
+                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
+                    // Set ssl false
+                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
+                    // Get download
+                    $download = curl_exec($curl);
+                    // Check if empty
+                    if (empty($download)) {
+                        // Send error
+                        ErrorHandler::warning(500, 'Something went wrong while trying to download the new framework version <br/> Error: ' . curl_errno($curl) . curl_error($curl));
+                        // Send error
+                        $return = array('status' => false, 'message' => 'update_error_see_log');
+                    } else {
+                        // Destination
+                        $destination = Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip';
+                        // Check dir exists
+                        if (!is_dir(Constants::path_resources . '/Updates')) {
+                            // If not create dir
+                            mkdir(Constants::path_resources . '/Updates', 0777);
+                        }
+                        // Create file
+                        $file = fopen($destination, "w+");
+                        // Set data
+                        fputs($file, $download);
+                        // Close
+                        fclose($file);
+                        // Send error
+                        $return = array('status' => true, 'message' => 'download_success');
+                    }
+                } catch (Exception $ex) {
                     // Send error
-                    ErrorHandler::warning(500, 'Something went wrong while trying to download the new framework version <br/> Error: ' . curl_errno($curl) . curl_error($curl));
+                    ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions, error: ' . $ex->getMessage());
                     // Send error
                     $return = array('status' => false, 'message' => 'update_error_see_log');
-                } else {
-                    // Destination
-                    $destination = Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip';
-                    // Check dir exists
-                    if(!is_dir(Constants::path_resources . '/Updates')){
-                        // If not create dir
-                        mkdir(Constants::path_resources . '/Updates', 0777);
-                    }
-                    // Create file
-                    $file = fopen($destination, "w+");
-                    // Set data
-                    fputs($file, $download);
-                    // Close
-                    fclose($file);
-                    // Send error
-                    $return = array('status' => true, 'message' => 'download_success');
                 }
-            } catch (Exception $ex) {
-                // Send error
-                ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions, error: ' . $ex->getMessage());
-                // Send error
-                $return = array('status' => false, 'message' => 'update_error_see_log');
+            } else {
+                // Set return
+                $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
             }
         } else {
-            // Set return
-            $return = array('status' => false, 'message' => 'update_not_needed');
+            $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
         }
         // Return
         return (object)$return;
@@ -144,54 +180,74 @@ class Updater
      */
     public static function info(): stdClass
     {
-        // Check if needed
-        if (self::$need_update) {
-            // Set return
-            $return = array('status' => true, 'message' => 'update_available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
+        // Check if version is pulled
+        if (!empty(self::$last_version)) {
+            // Check if needed
+            if (self::$need_update) {
+                // Set return
+                $return = array('status' => true, 'message' => 'update_available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version, 'changelog' => self::$changelog);
+            } else {
+                // Set return
+                $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
+            }
         } else {
-            // Set return
-            $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version,  'latest_version' => self::$last_version);
+            $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
         }
         // Return
         return (object)$return;
     }
 
     /**
+     * Return changelog
+     * @return string
+     */
+    public static function getChangelog(): string
+    {
+        // Return changelog
+        return self::$changelog;
+    }
+
+    /**
      * Install the update
      * @return stdClass
      */
-    public static function installUpdate() : stdClass
+    public static function installUpdate(): stdClass
     {
-        // check if needed
-        if (self::$need_update) {
-            // Download update
-            $download = self::downloadUpdate();
-            // Check if download success
-            if ($download->status) {
-                // Create new zip Archive
-                $update = new ZipArchive();
-                // Open zip/update
-                if ($update->open(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
-                    // Extract zip/update
-                    $update->extractTo(Constants::path_root);
-                    // Close zip/update
-                    $update->close();
-                    // Set return
-                    $return = array('status' => true, 'message' => "update_installed");
+        // Check if version is pulled
+        if (!empty(self::$last_version)) {
+            // check if needed
+            if (self::$need_update) {
+                // Download update
+                $download = self::downloadUpdate();
+                // Check if download success
+                if ($download->status) {
+                    // Create new zip Archive
+                    $update = new ZipArchive();
+                    // Open zip/update
+                    if ($update->open(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
+                        // Extract zip/update
+                        $update->extractTo(Constants::path_root);
+                        // Close zip/update
+                        $update->close();
+                        // Set return
+                        $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
+                    } else {
+                        // Set return
+                        $return = array('status' => false, 'message' => 'update_failed', 'error' => 'Update could not be opened.');
+                    }
                 } else {
                     // Set return
-                    $return = array('status' => false, 'message' => 'update_failed', 'error' => 'Update could not be opened.');
+                    $return = array('status' => false, 'message' => 'update_failed', 'error' => $download->message);
                 }
             } else {
                 // Set return
-                $return = array('status' => false, 'message' => 'update_failed', 'error' => $download->message);
+                $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
             }
         } else {
-            // Set return
-            $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version,  'latest_version' => self::$last_version);
+            $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
         }
         // Return update
-        return (object) $return;
+        return (object)$return;
     }
 
 }
