@@ -72,6 +72,10 @@ class AutoLoader {
     public function loadPublic(){
         // Load standard public
         require_once Constants::path_public . '/index.php';
+        // Set startup complete
+        Constants::$startup_complete = true;
+        // Disable debug, because startup complete
+        Settings::toggleDebug(false);
     }
 
 }

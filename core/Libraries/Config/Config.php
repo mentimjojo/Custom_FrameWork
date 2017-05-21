@@ -6,6 +6,11 @@ class Config {
      */
     public function __construct()
     {
+        // Check startup complete
+        if(!Constants::$startup_complete){
+            // Enable debug for now
+            Settings::toggleDebug(false);
+        }
         // Set timezone to Netherlands (Because developer lives there)
         settings::setTimezone();
         // Setup Constants

@@ -11,6 +11,8 @@ class Settings
     {
         // Update Debug
         Constants::$debug = $toggle;
+        // Rerun debug
+        new Debug();
     }
 
     /**

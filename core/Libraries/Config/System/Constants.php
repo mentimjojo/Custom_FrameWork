@@ -4,10 +4,16 @@ class Constants
 {
 
     /**
+     * Startup complete
+     * @var bool
+     */
+    public static $startup_complete = false;
+
+    /**
      * Debug for the whole project
      * @var bool
      */
-    public static $debug = true;
+    public static $debug = false;
 
     /**
      * Framework Version
