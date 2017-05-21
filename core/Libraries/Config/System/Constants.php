@@ -13,7 +13,7 @@ class Constants
      * Framework Version
      * @var string
      */
-    const fw_version = "0.1.105";
+    const fw_version = "0.1.134";
 
     /**
      * SSL disabled by default
