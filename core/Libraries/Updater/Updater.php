@@ -110,6 +110,11 @@ class Updater
                 } else {
                     // Destination
                     $destination = Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip';
+                    // Check dir exists
+                    if(!is_dir(Constants::path_resources . '/Updates')){
+                        // If not create dir
+                        mkdir(Constants::path_resources . '/Updates', 0777);
+                    }
                     // Create file
                     $file = fopen($destination, "w+");
                     // Set data
