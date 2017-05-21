@@ -188,7 +188,7 @@ class Updater
                 $return = array('status' => true, 'message' => 'update_available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version, 'changelog' => self::$changelog);
             } else {
                 // Set return
-                $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
+                $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version, 'changelog' => self::$changelog);
             }
         } else {
             $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
