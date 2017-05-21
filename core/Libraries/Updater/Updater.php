@@ -74,7 +74,7 @@ class Updater
     private function checkVersion()
     {
         // Check if update needed
-        if (Constants::$fw_version < self::$last_version) {
+        if (Constants::fw_version < self::$last_version) {
             // Set update needed
             self::$need_update = true;
         }
@@ -142,7 +142,7 @@ class Updater
         // Check if needed
         if (self::$need_update) {
             // Set return
-            $return = array('status' => true, 'message' => 'Update available', 'installed_version' => Constants::$fw_version, 'latest_version' => self::$last_version);
+            $return = array('status' => true, 'message' => 'Update available', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
         } else {
             // Set return
             $return = array('status' => false, 'message' => 'No update needed');
