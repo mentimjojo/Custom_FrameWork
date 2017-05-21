@@ -20,7 +20,7 @@ class Constants
      * DO NOT EDIT THIS. DANGER DANGER DANGER. ONLY A IDIOT WOULD EDIT THIS.
      * @var string
      */
-    const fw_version = "0.1.2.210";
+    const fw_version = "0.1.2.211";
 
     /**
      * SSL disabled by default
