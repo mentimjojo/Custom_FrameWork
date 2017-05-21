@@ -2,7 +2,8 @@
 /**
  * Standard index.php
  */
+Settings::toggleSSL(true);
+Settings::toggleDebug(true);
 
-Routes::setHome('home.php');
-Routes::create('home', 'home.php');
+Routes::load();
 ?>

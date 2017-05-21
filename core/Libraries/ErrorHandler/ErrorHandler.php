@@ -18,7 +18,6 @@ class ErrorHandler
      * @param string $message
      */
     public static function warning(int $code, string $message){
-        echo 'ho';
         // Check debug
         if (Constants::$debug) {
             // Get error template
