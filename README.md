@@ -6,7 +6,7 @@ For this framework to run, you're gonna need:
 
 * PHP 7.1
 * PHP CURL Extension
-* PHP PDO or MySQLi Extension
+* PHP PDO or MySQLi Extension _(Only if you're gonna use Databases)_
 
 # Documentation
 There is a large documentation availble on Google drive. 
