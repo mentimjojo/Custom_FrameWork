@@ -46,8 +46,6 @@ class Core
         new Config();
         // Run Error
         new ErrorHandler();
-        // Startup and run Updater
-        new Updater();
         // Run routes
         new Routes();
         // Run utils

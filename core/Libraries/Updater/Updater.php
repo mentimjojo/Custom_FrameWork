@@ -25,18 +25,18 @@ class Updater
      * Constructor is gonna check for us if there is a new version
      * Updater constructor.
      */
-    public function __construct()
+    private static function findUpdates()
     {
         // Check last version
-        $this->getLastVersion();
+        self::getLastVersion();
         // Check version
-        $this->checkVersion();
+        self::checkVersion();
     }
 
     /**
      * Get last version of the framework
      */
-    private function getLastVersion()
+    private static function getLastVersion()
     {
         // Get last version
         $lastVersionUrl = Constants::updater_url . "/versions/releases.php";
@@ -101,7 +101,7 @@ class Updater
     /**
      * Check version
      */
-    private function checkVersion()
+    private static function checkVersion()
     {
         // Check if update needed
         if (Constants::fw_version < self::$last_version) {
@@ -116,6 +116,8 @@ class Updater
      */
     private static function downloadUpdate(): stdClass
     {
+        // Find updates
+        self::findUpdates();
         // Check if version is pulled
         if (!empty(self::$last_version)) {
             // Check if update needed
@@ -180,6 +182,8 @@ class Updater
      */
     public static function info(): stdClass
     {
+        // Find updates
+        self::findUpdates();
         // Check if version is pulled
         if (!empty(self::$last_version)) {
             // Check if needed
@@ -203,6 +207,8 @@ class Updater
      */
     public static function getChangelog(): string
     {
+        // Find updates
+        self::findUpdates();
         // Return changelog
         return self::$changelog;
     }
@@ -213,6 +219,8 @@ class Updater
      */
     public static function installUpdate(): stdClass
     {
+        // Find updates
+        self::findUpdates();
         // Check if version is pulled
         if (!empty(self::$last_version)) {
             // check if needed
