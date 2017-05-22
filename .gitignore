@@ -1,2 +1,6 @@
 .idea
 /core/Resources/Logs/Errors/
+/favicon.ico
+/.user.ini
+/php.ini
+/error_log
