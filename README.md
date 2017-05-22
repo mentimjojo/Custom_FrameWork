@@ -12,7 +12,7 @@ You're gonna need a website server with the following on it.
 
 ### Knowledge
 This framework is NOT an CMS. Its build to be the basic's of a website.
-If you're gonna use this framework you gonna need basic PHP, HTML, en other web programming languages knowledge.
+If you're gonna use this framework you gonna need basic PHP, HTML and knowledge of other web programming languages.
 
 # Documentation
 There is a large documentation availble on Google drive. 
