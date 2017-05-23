@@ -13,6 +13,18 @@ class ErrorHandler
     }
 
     /**
+     * Log error message
+     * @param int $code
+     * @param string $message
+     */
+    public static function log(int $code, string $message){
+        // Error message
+        $error = "Warning: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
+        // Save error in file
+        file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+    }
+
+    /**
      * Warning
      * @param int $code
      * @param string $message
