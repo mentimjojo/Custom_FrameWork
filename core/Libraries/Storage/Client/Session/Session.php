@@ -46,10 +46,11 @@ class Session {
     }
 
     /**
-     * Destroy session
-     * @deprecated
+     * Destroy session, only use this if you completely get rid of sessions.
+     * DANGER
      */
     public function destroySession() {
+        // Destroy session
         session_destroy();
     }
 
