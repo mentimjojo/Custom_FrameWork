@@ -75,7 +75,7 @@ class Database
      * @param string $db_name
      * @param int $port
      */
-    public function setCredentials(string $host, string $db_name, string $user, string $pass, int $port = 3600)
+    public function setCredentials(string $host, string $db_name, string $user, string $pass, int $port = 3306)
     {
         /**
          * Set credentials
