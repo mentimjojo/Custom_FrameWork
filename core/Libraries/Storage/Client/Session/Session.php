@@ -55,15 +55,16 @@ class Session {
 
     /**
      * Create session
+     * @param bool $override override the existing session
      * @return stdClass
      */
-    public function createSession() : stdClass {
+    public function createSession(bool $override = false) : stdClass {
         // if name empty
         if(!empty($this->session_name)) {
             // If empty value
             if(!empty($this->session_value)) {
                 // check if session name exists
-                if (!isset($_SESSION[$this->session_name])) {
+                if (!isset($_SESSION[$this->session_name]) || $override) {
                     // Set session
                     $_SESSION[$this->session_name] = $this->session_value;
                     // Set return
