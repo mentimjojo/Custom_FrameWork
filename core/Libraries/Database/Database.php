@@ -11,7 +11,7 @@ class Database
      * Supported Database engines
      * @var array
      */
-    private $engines = array("MySQLi", "PDO", "MSSQL");
+    private $engines = array("mysqli", "pdo", "mssql");
 
     /**
      * Database engine to connect
@@ -46,7 +46,7 @@ class Database
         // Check type supported
         if(in_array($engine, $this->engines)){
             // Set type
-            $this->engine = $engine;
+            $this->engine = strtolower($engine);
             // Return true
             return array('true');
         } else {
@@ -95,13 +95,13 @@ class Database
     public function createConnection(){
         // Switch to right Engine
         switch ($this->engine){
-            case "PDO":
+            case "pdo":
                 $this->db_engine = new MySQL_PDO($this->credentials);
                 break;
-            case "MySQLi":
+            case "mysqli":
                 $this->db_engine = new MySQL_MySQLi($this->credentials);
                 break;
-            case "MSSQL":
+            case "mssql":
                 $this->db_engine = new MSSQL_SQLSRV($this->serverName, $this->credentials);
                 break;
             default:
