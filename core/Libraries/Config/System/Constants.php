@@ -82,7 +82,7 @@ class Constants
     private function getUrl()
     {
         // Get url, without / on the end
-        self::$url_root = "http://" . $_SERVER['HTTP_HOST'];
+        self::$url_root = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
         // Set url with public, without / on the end
         self::$url_public = self::$url_root . '/public';
     }
