@@ -14,6 +14,7 @@ class Debug {
      * Set debug
      */
     private function setDebug(){
+        // Check if debug is enabled
         if(Constants::$debug){
             // Display errors
             ini_set('display_errors', 1);

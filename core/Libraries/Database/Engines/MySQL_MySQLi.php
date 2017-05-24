@@ -39,7 +39,7 @@ class MySQL_MySQLi {
                 $this->credentials->port
             );
         } catch (Exception $ex){
-            ErrorHandler::die(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
+            ErrorHandler::warning(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
         }
     }
 
@@ -71,7 +71,7 @@ class MySQL_MySQLi {
                 // Return query
                 return $stm;
             } catch (Exception $ex){
-                ErrorHandler::die(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());
+                ErrorHandler::warning(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());
             }
         }
         // Just to be sure

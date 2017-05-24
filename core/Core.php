@@ -7,9 +7,12 @@ require_once __DIR__ . '/Libraries/AutoLoader/AutoLoader.php';
 
 /**
  * Core class of the framework
+ * This class loads the complete framework and public folder (index.php). It loads all the essential features.
+ * DO NOT EDIT THIS CLASS.
  * @Author T.Nijborg
  * @Version 0.1.1
  * @Since 0.1
+ *
  * Class Core
  */
 class Core
@@ -38,17 +41,18 @@ class Core
 
     /**
      * Initialize framework
+     * - Loads in this folder
      */
     private function initialize(){
-        // Run AutoLoader
+        // Setup AutoLoader in this folder
         $autoLoader = new AutoLoader(__DIR__);
-        // Run config
+        // Setup config
         new Config();
-        // Run Error
+        // Setup Error
         new ErrorHandler();
-        // Run routes
+        // Setup routes
         new Routes();
-        // Run utils
+        // Setup utils
         new Utils();
         // Load public
         $autoLoader->loadPublic();

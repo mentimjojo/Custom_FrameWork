@@ -5,12 +5,14 @@ class Constants
 
     /**
      * Startup complete
+     * Only edit this if you know what you are doing.
      * @var bool
      */
     public static $startup_complete = false;
 
     /**
      * Debug for the whole project
+     * You can't enable it here. DEBUG Will not work.
      * @var bool
      */
     public static $debug = false;
@@ -24,6 +26,7 @@ class Constants
 
     /**
      * SSL disabled by default
+     * You can't enable it here! SSL WON't WORK
      * @var bool
      */
     public static $ssl = false;

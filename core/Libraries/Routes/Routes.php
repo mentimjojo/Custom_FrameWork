@@ -22,8 +22,8 @@ class Routes
     private static $routes = array();
 
     /**
-     * Get route
      * Routes constructor.
+     * Startup route controller.
      */
     public function __construct()
     {
@@ -32,7 +32,7 @@ class Routes
     }
 
     /**
-     * Get route from url
+     * Get route from url, so ?route=value
      */
     private function getRoute()
     {
@@ -77,7 +77,7 @@ class Routes
     }
 
     /**
-     * Load system
+     * Load system, this mean routing is loading. This function is self used.
      */
     public static function load()
     {

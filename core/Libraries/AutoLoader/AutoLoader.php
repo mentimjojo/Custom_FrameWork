@@ -7,6 +7,7 @@ class AutoLoader {
      */
     public function __construct(string $path)
     {
+        // Load framework internal
         $this->internalLoad($path);
     }
 
@@ -41,7 +42,7 @@ class AutoLoader {
      * @param array $filter set the filter
      */
     public static function load(string $path, array $filter = array()){
-        // Setup filters
+        // Setup filters, should fix dots in scan dir.
         $filter[] = '.';
         $filter[] = '..';
         // Remove constants path
@@ -70,9 +71,9 @@ class AutoLoader {
      * Always load last
      */
     public function loadPublic(){
-        // Load standard public
+        // Load standard public, to be safe require once
         require_once Constants::path_public . '/index.php';
-        // Set startup complete
+        // Set startup complete, so debug can't enable itself again.
         Constants::$startup_complete = true;
         // Disable debug, because startup complete
         Settings::toggleDebug(false);

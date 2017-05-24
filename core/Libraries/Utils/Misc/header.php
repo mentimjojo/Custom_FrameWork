@@ -1,5 +1,7 @@
 <?php
-class Header {
+
+class Header
+{
 
     /**
      * Redirect to page
@@ -7,15 +9,18 @@ class Header {
      * @param int $delay
      * @param bool $end
      */
-    public final function redirect(string $url, int $delay, bool $end = false){
+    public final function redirect(string $url, int $delay = 0, bool $end = false)
+    {
         // Run ob
         ob_start();
         // Redirect
         header("refresh:" . $delay . ";url=" . $url);
         // Check if need to die
-        if($end)
+        if ($end) {
             die();
+        }
     }
 
 }
+
 ?>
