@@ -50,7 +50,7 @@ class MSSQL_SQLSRV {
             );
         } catch (Exception $ex){
             // Return warning
-            ErrorHandler::warning(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
+            ErrorHandler::die(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
         }
     }
 
