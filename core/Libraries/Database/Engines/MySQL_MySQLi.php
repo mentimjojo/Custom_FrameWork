@@ -30,7 +30,9 @@ class MySQL_MySQLi {
      * Connect to database with MySQLi
      */
     private function connect(){
+        // Try
         try {
+            // Setup database connection
             $this->connection = new mysqli(
                 $this->credentials->host,
                 $this->credentials->user,
@@ -39,6 +41,7 @@ class MySQL_MySQLi {
                 $this->credentials->port
             );
         } catch (Exception $ex){
+            // Return warning
             ErrorHandler::warning(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
         }
     }
@@ -48,9 +51,12 @@ class MySQL_MySQLi {
      * @return mixed
      */
     public function getConnection(){
+        // Check connection is set
         if(isset($this->connection)){
+            // Return connection
             return $this->connection;
         } else {
+            // Return null
             return null;
         }
     }
@@ -63,6 +69,7 @@ class MySQL_MySQLi {
     public function query(string $query) {
         // Check query not empty
         if(empty($query)){
+            // Return
             return array('status' => false, 'msg' => 'No query filled in');
         } else {
             try {
@@ -71,6 +78,7 @@ class MySQL_MySQLi {
                 // Return query
                 return $stm;
             } catch (Exception $ex){
+                // Return warning
                 ErrorHandler::warning(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());
             }
         }

@@ -37,7 +37,9 @@ class MSSQL_SQLSRV {
      * Connect to database with SqlSrv connect
      */
     private function connect(){
+        // Try
         try {
+            // Setup connection
             $this->connection = sqlsrv_connect(
                 $this->serverName,
                 array(
@@ -47,6 +49,7 @@ class MSSQL_SQLSRV {
                 )
             );
         } catch (Exception $ex){
+            // Return warning
             ErrorHandler::warning(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
         }
     }
@@ -56,9 +59,12 @@ class MSSQL_SQLSRV {
      * @return mixed
      */
     public function getConnection(){
+        // Check connection is set
         if(isset($this->connection)){
+            // Return connection
             return $this->connection;
         } else {
+            // Return null
             return null;
         }
     }
@@ -71,6 +77,7 @@ class MSSQL_SQLSRV {
     public function query(string $query) {
         // Check query not empty
         if(empty($query)){
+            // Return
             return array('status' => false, 'msg' => 'No query filled in');
         } else {
             try {
@@ -79,6 +86,7 @@ class MSSQL_SQLSRV {
                 // Return query
                 return $stm;
             } catch (Exception $ex){
+                // Return warning
                 ErrorHandler::warning(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());
             }
         }
