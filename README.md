@@ -5,7 +5,7 @@ Framework
 Underneath you will find the requirements of the framework.
 
 ### Web server
-You're gonna need a website server with the following on it.
+You're gonna need a webserver with the following on it.
 * PHP 7.1
 * PHP CURL Extension
 * PHP PDO or MySQLi Extension _(Only if you're gonna use Databases)_
