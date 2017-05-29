@@ -1,5 +1,6 @@
 # Custom_FrameWork
-Framework
+This is a custom WebFrameWork for easily building websites. It's designed to be the basics
+of a website. This framework is owned and created by T.Nijborg. And a little help of some friends.
 
 # Requirements
 Underneath you will find the requirements of the framework.
