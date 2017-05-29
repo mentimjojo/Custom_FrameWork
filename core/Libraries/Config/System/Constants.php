@@ -5,7 +5,7 @@ class Constants
 
     /**
      * Startup complete
-     * Only edit this if you know what you are doing.
+     * Only edit this if you know the fuck what you are doing.
      * @var bool
      */
     public static $startup_complete = false;
