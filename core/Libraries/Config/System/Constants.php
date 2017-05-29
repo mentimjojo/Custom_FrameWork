@@ -22,7 +22,7 @@ class Constants
      * DO NOT EDIT THIS. DANGER DANGER DANGER. ONLY A IDIOT WOULD EDIT THIS.
      * @var string
      */
-    const fw_version = "0.1.2.216";
+    const fw_version = "0.1.2.217";
 
     /**
      * SSL disabled by default
@@ -86,6 +86,11 @@ class Constants
     {
         // Get url, without / on the end
         self::$url_root = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
+        // Remove last / from url
+        if(substr(self::$url_root, -1) == '/'){
+            // Set new url
+            self::$url_root = substr(self::$url_root, 0, -1);
+        }
         // Set url with public, without / on the end
         self::$url_public = self::$url_root . '/public';
     }
