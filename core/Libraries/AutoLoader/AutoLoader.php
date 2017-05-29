@@ -71,12 +71,12 @@ class AutoLoader {
      * Always load last
      */
     public function loadPublic(){
+        // Disable debug, because startup almost complete
+        Settings::toggleDebug(false);
         // Load standard public, to be safe require once
         require_once Constants::path_public . '/index.php';
         // Set startup complete, so debug can't enable itself again.
         Constants::$startup_complete = true;
-        // Disable debug, because startup complete
-        Settings::toggleDebug(false);
     }
 
 }
