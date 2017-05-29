@@ -44,7 +44,7 @@ class Database
      */
     public function setEngine(string $engine) : array {
         // Check type supported
-        if(in_array($engine, $this->engines)){
+        if(in_array(strtolower($engine), $this->engines)){
             // Set type
             $this->engine = strtolower($engine);
             // Return true
