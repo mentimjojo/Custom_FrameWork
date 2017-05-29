@@ -52,6 +52,15 @@ class Settings
             if (!isset($_SERVER["HTTPS"])) {
                 Utils::$header->redirect(Constants::$url_root . $_SERVER["REQUEST_URI"], 0, true);
             }
+        } else {
+            // Remove SSL in root url
+            Constants::$url_root = str_replace('https://', 'http://', Constants::$url_root);
+            // Remove SSL in public url
+            Constants::$url_public = str_replace('https://', 'http://', Constants::$url_public);
+            // Redirect if needed
+            if (isset($_SERVER["HTTPS"])) {
+                Utils::$header->redirect(Constants::$url_root . $_SERVER["REQUEST_URI"], 0, true);
+            }
         }
     }
 

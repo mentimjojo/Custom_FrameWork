@@ -84,8 +84,10 @@ class Constants
      */
     private function getUrl()
     {
+        // Protocol
+        $protocol = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
         // Get url, without / on the end
-        self::$url_root = "http://" . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
+        self::$url_root = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
         // Remove last / from url
         if(substr(self::$url_root, -1) == '/'){
             // Set new url
