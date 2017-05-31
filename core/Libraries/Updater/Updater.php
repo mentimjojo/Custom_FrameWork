@@ -45,16 +45,13 @@ class Updater
             /**
              * Get version
              */
-            // Startup curl
-            $curl = curl_init();
-            // Set url
-            curl_setopt($curl, CURLOPT_URL, $lastVersionUrl);
-            // Set return
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            // Set ssl false
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            // Get version
-            $versions = curl_exec($curl);
+            // Setup curl
+            $curl_update = new Curl();
+            $curl_update->setUrl($lastVersionUrl);
+            $curl_update->setSSLVerifyPeer(false);
+            $curl_update->setReturn(true);
+            // Execute curl
+            $versions = $curl_update->execute();
             // Check if empty
             if (empty($versions) || strpos($versions, 'Not Found') !== false) {
                 // Send error
@@ -75,16 +72,13 @@ class Updater
             /**
              * Get changelog
              */
-            // Startup curl
-            $curl = curl_init();
-            // Set url
-            curl_setopt($curl, CURLOPT_URL, Constants::updater_url . '/changelogs/fw-' . self::$last_version . '.txt');
-            // Set return
-            curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-            // Set ssl false
-            curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-            // Changelog
-            $changelog = curl_exec($curl);
+            // setup curl
+            $curl_change = new Curl();
+            $curl_change->setUrl(Constants::updater_url . '/changelogs/fw-' . self::$last_version . '.txt');
+            $curl_change->setSSLVerifyPeer(false);
+            $curl_change->setReturn(true);
+            // Execute
+            $changelog = $curl_change->execute();
             // Check if empty or not exists
             if (empty($changelog) || strpos($changelog, 'Not Found') !== false) {
                 // Do nothing
@@ -127,15 +121,12 @@ class Updater
                 // Try
                 try {
                     // Startup curl
-                    $curl = curl_init();
-                    // Set url
-                    curl_setopt($curl, CURLOPT_URL, $download_url);
-                    // Set return
-                    curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-                    // Set ssl false
-                    curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-                    // Get download
-                    $download = curl_exec($curl);
+                    $curl_down = new Curl();
+                    $curl_down->setUrl($download_url);
+                    $curl_down->setReturn(true);
+                    $curl_down->setSSLVerifyPeer(false);
+                    // Execute
+                    $download = $curl_down->execute();
                     // Check if empty
                     if (empty($download)) {
                         // Send error
