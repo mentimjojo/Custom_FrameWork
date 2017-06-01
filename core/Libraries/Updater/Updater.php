@@ -39,7 +39,7 @@ class Updater
     private static function getLastVersion()
     {
         // Get last version
-        $lastVersionUrl = Constants::updater_url . "/versions/releases.php";
+        $lastVersionUrl = Constants::cfw_api_url . "/versions/releases.php";
         // Try
         try {
             /**
@@ -55,7 +55,7 @@ class Updater
             // Check if empty
             if (empty($versions) || strpos($versions, 'Not Found') !== false) {
                 // Send error
-                ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions <br/> Error: ' . curl_errno($curl) . curl_error($curl));
+                ErrorHandler::warning(500, 'Something went wrong while trying to find new framework versions <br/> Error: ' . curl_errno($curl_update->get()) . curl_error($curl_update->get()));
             } else {
                 // All versions
                 $versionList = explode("\n", $versions);
@@ -74,7 +74,7 @@ class Updater
              */
             // setup curl
             $curl_change = new Curl();
-            $curl_change->setUrl(Constants::updater_url . '/changelogs/fw-' . self::$last_version . '.txt');
+            $curl_change->setUrl(Constants::cfw_api_url . '/changelogs/fw-' . self::$last_version . '.txt');
             $curl_change->setSSLVerifyPeer(false);
             $curl_change->setReturn(true);
             // Execute
@@ -117,7 +117,7 @@ class Updater
             // Check if update needed
             if (self::$need_update) {
                 // Get url
-                $download_url = Constants::updater_url . '/releases/fw-' . self::$last_version . '.zip';
+                $download_url = Constants::cfw_api_url . '/releases/fw-' . self::$last_version . '.zip';
                 // Try
                 try {
                     // Startup curl
@@ -130,7 +130,7 @@ class Updater
                     // Check if empty
                     if (empty($download)) {
                         // Send error
-                        ErrorHandler::warning(500, 'Something went wrong while trying to download the new framework version <br/> Error: ' . curl_errno($curl) . curl_error($curl));
+                        ErrorHandler::warning(500, 'Something went wrong while trying to download the new framework version <br/> Error: ' . curl_errno($curl_down->get()) . curl_error($curl_down->get()));
                         // Send error
                         $return = array('status' => false, 'message' => 'update_error_see_log');
                     } else {

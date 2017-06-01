@@ -89,6 +89,15 @@ class Curl
         return $execute;
     }
 
+    /**
+     * Get the curl
+     * @return resource
+     */
+    public function get(){
+        // Get the curl
+        return self::$curl;
+    }
+
 }
 
 ?>

@@ -68,7 +68,7 @@ class Constants
      * The updater url
      * @var string
      */
-    const updater_url = 'https://fw-system.timnijborg.com';
+    const cfw_api_url = 'https://fw-system.timnijborg.com';
 
     /**
      * Constants constructor.
