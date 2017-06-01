@@ -1,5 +1,6 @@
 <?php
 /**
- * Here will be downloaded the updates to. If a update failed the update  will not be deleted but system will try to install it later.
+ * Here will be downloaded the updates to. If a update failed the update will not be deleted but the system will try to install it later.
+ * If you wish the framework installs the updates automatically, create cronjob to a file with the updater features.
  * DO NOT REMOVE THIS FOLDER. IF YOU DO, UPDATING WILL BE IMPOSSIBLE.
  */

@@ -161,6 +161,7 @@ class Updater
                 $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
             }
         } else {
+            // Return
             $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
         }
         // Return
@@ -245,6 +246,7 @@ class Updater
                 $return = array('status' => false, 'message' => 'update_not_needed', 'installed_version' => Constants::fw_version, 'latest_version' => self::$last_version);
             }
         } else {
+            // Return
             $return = array('status' => false, 'message' => 'update_no_version_found', 'installed_version' => Constants::fw_version, 'latest_version' => 'NULL');
         }
         // Return update
