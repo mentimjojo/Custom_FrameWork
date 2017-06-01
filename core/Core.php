@@ -11,12 +11,17 @@ require_once __DIR__ . '/Libraries/AutoLoader/AutoLoader.php';
  * DO NOT EDIT THIS CLASS.
  * @Author T.Nijborg
  * @Version 0.1.1
- * @Since 0.1
+ * @Since 0.2
  *
  * Class Core
  */
 class Core
 {
+    /**
+     * Instants of the AutoLoader
+     * @var AutoLoader
+     */
+    private $AutoLoader;
 
     /**
      * Core constructor.
@@ -24,15 +29,19 @@ class Core
     public function __construct()
     {
         // Startup
-        $this->startup();
+        $this->_Startup();
         // Initialize framework
-        $this->initialize();
+        $this->_Initialize_FrameWork();
+        // Load public (APP)
+        $this->_Load_Public();
+        // After load
+        $this->_After();
     }
 
     /**
      * Startup some needed PHP features
      */
-    private function startup(){
+    private function _Startup(){
         // Start ob
         ob_start();
         // Start sessions
@@ -43,19 +52,32 @@ class Core
      * Initialize framework
      * - Loads in this folder
      */
-    private function initialize(){
+    private function _Initialize_FrameWork(){
         // Setup AutoLoader in this folder
-        $autoLoader = new AutoLoader(__DIR__);
-        // Setup config
+        $this->AutoLoader = new AutoLoader(__DIR__);
+        // Initialize config
         new Config();
-        // Setup Error
+        // Initialize error handler
         new ErrorHandler();
-        // Setup routes
+        // Initialize routes
         new Routes();
-        // Setup utils
+        // Initialize routes
         new Utils();
-        // Load public
-        $autoLoader->loadPublic();
+    }
+
+    /**
+     * Load public folder
+     */
+    private function _Load_Public(){
+        // Load public folder
+        $this->AutoLoader->loadPublic();
+    }
+
+    /**
+     * After loading is done
+     */
+    private function _After(){
+
     }
 
 }
