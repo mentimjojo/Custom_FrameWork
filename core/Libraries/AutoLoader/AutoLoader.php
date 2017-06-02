@@ -18,7 +18,7 @@ class AutoLoader {
      * @internal Important feature
      * @version 0.1
      */
-    private function internalLoad(string $path){
+    public function internalLoad(string $path){
         // Scan path
         $scan = array_diff(scandir($path), array('.', '..', 'Core.php', 'Resources'));
         // Foreach found item
