@@ -225,14 +225,20 @@ class Updater
                     $update = new ZipArchive();
                     // Open zip/update
                     if ($update->open(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
-                        // Extract zip/update
-                        $update->extractTo(Constants::path_root);
-                        // Close zip/update
-                        $update->close();
-                        // Update installed, now remove it
-                        unlink(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip');
-                        // Set return
-                        $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
+                        try {
+                            // Extract zip/update
+                            $update->extractTo(Constants::path_root);
+                            // Close zip/update
+                            $update->close();
+                            // Update installed, now remove it
+                            unlink(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip');
+                            // Set return
+                            $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
+                            // Catch exception
+                        } catch (Exception $ex){
+                            // Set return
+                            $return = array('status' => false, 'message' => "update_failed_unknown", 'error' => $ex->getMessage());
+                        }
                     } else {
                         // Set return
                         $return = array('status' => false, 'message' => 'update_failed', 'error' => 'Update could not be opened.');
