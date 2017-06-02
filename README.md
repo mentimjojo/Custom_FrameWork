@@ -3,6 +3,18 @@ This is a custom WebFrameWork for easily building websites. It's designed to be 
 of a website. This framework is owned and created by T.Nijborg. And a little help of some friends.
 You can find the contributors underneath.
 
+# Features
+* Routes (For routing and url management)
+* Database
+    - PDO
+    - MySQLI
+    - SQLSRV (MSSQL, Access, etc)
+* Custom ErrorHandler
+* Mailer
+* Storage (Files, sessions, cookies, etc)
+* Utils package (For handy features)
+* Framework updater (To keep the framework up to date)
+
 # Requirements
 Underneath you will find the requirements of the framework.
 
