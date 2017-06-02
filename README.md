@@ -9,7 +9,7 @@ You can find the contributors underneath.
     - PDO
     - MySQLI
     - SQLSRV (MSSQL, Access, etc)
-* Custom ErrorHandler
+* ErrorHandler
 * Mailer
 * Storage (Files, sessions, cookies, etc)
 * Utils package (For handy features)
