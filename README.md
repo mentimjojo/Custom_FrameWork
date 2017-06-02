@@ -14,6 +14,7 @@ You can find the contributors underneath.
 * Storage (Files, sessions, cookies, etc)
 * Utils package (For handy features)
 * Framework updater (To keep the framework up to date)
+* And many others
 
 # Requirements
 Underneath you will find the requirements of the framework.
