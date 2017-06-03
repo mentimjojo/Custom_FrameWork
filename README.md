@@ -1,4 +1,4 @@
-# Custom_FrameWork
+# Custom FrameWork T.Nijborg (Mentimjojo)
 This is a custom WebFrameWork for easily building websites. It's designed to be the basics
 of a website. This framework is owned and created by T.Nijborg. And a little help of some friends.
 You can find the contributors underneath.
