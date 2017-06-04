@@ -1,5 +1,5 @@
 .idea
-/core/Resources/Logs/Errors/
+/framework/Resources/Logs/Errors/
 /favicon.ico
 /.user.ini
 /php.ini
