@@ -235,6 +235,8 @@ class Updater
                     // Open zip/update
                     if ($update->open(Constants::path_resources . '/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
                         try {
+                            // Delete Framework Folder
+                            system("rm -rf ".escapeshellarg(Constants::path_root.'/framework/'));
                             // Extract zip/update
                             $update->extractTo(Constants::path_root);
                             // Close zip/update
