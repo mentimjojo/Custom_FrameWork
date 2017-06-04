@@ -21,7 +21,7 @@ class ErrorHandler
         // Error message
         $error = "Warning: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
         // Save error in file
-        file_put_contents(Constants::path_logs . '/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+        file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
     }
 
     /**
@@ -44,7 +44,7 @@ class ErrorHandler
             // Error message
             $error = "Warning: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::path_logs . '/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
     }
 
@@ -69,7 +69,7 @@ class ErrorHandler
             // Error message
             $error = "Fatal error: " . date('H:i:s', time()) . " - Something went wrong with error code '" . $code . "' and message '" . $message."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::path_logs . '/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
         // Die site with template
         die($template);
@@ -102,7 +102,7 @@ class ErrorHandler
             // Error message
             $error = "Fatal error: " .date('H:i:s', time()) . " - Something went wrong on '" . $errfile . "' on line '" . $errline . "' with error code '" . $errno . "' and message '" . $errstr."'".PHP_EOL;
             // Save error in file
-            file_put_contents(Constants::path_logs . '/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
+            file_put_contents(Constants::path_resources . '/Logs/Errors/' . date('d-m-Y', time()) . '.txt', $error, FILE_APPEND);
         }
     }
 
