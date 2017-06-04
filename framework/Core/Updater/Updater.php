@@ -47,8 +47,11 @@ class Updater
              */
             // Setup curl
             $curl_update = new Curl();
+            // Set url
             $curl_update->setUrl($lastVersionUrl);
+            // Set ssl
             $curl_update->setSSLVerifyPeer(false);
+            // Set return
             $curl_update->setReturn(true);
             // Execute curl
             $versions = $curl_update->execute();
@@ -74,8 +77,11 @@ class Updater
              */
             // setup curl
             $curl_change = new Curl();
+            // Set url
             $curl_change->setUrl(Constants::cfw_api_url . '/changelogs/fw-' . self::$last_version . '.txt');
+            // Set ssl
             $curl_change->setSSLVerifyPeer(false);
+            // Set return
             $curl_change->setReturn(true);
             // Execute
             $changelog = $curl_change->execute();
@@ -122,8 +128,11 @@ class Updater
                 try {
                     // Startup curl
                     $curl_down = new Curl();
+                    // Set url
                     $curl_down->setUrl($download_url);
+                    // Set return
                     $curl_down->setReturn(true);
+                    // Set ssl
                     $curl_down->setSSLVerifyPeer(false);
                     // Execute
                     $download = $curl_down->execute();
@@ -235,7 +244,7 @@ class Updater
                             // Set return
                             $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
                             // Catch exception
-                        } catch (Exception $ex){
+                        } catch (Exception $ex) {
                             // Set return
                             $return = array('status' => false, 'message' => "update_failed_unknown", 'error' => $ex->getMessage());
                         }

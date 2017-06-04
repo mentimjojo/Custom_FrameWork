@@ -49,8 +49,9 @@ class Curl
      * Set post for the curl
      * @param mixed $data
      */
-    public function setPOST(mixed $data){
-        if(!empty($data)){
+    public function setPOST(mixed $data)
+    {
+        if (!empty($data)) {
             // Set curl on post
             curl_setopt(self::$curl, CURLOPT_POST, true);
             // Send the data to the api
@@ -82,7 +83,8 @@ class Curl
      * Execute curl
      * @return mixed
      */
-    public function execute() : mixed{
+    public function execute()
+    {
         // Execute curl
         $execute = curl_exec(self::$curl);
         // Return execute
@@ -93,7 +95,8 @@ class Curl
      * Get the curl
      * @return resource
      */
-    public function get(){
+    public function get()
+    {
         // Get the curl
         return self::$curl;
     }
