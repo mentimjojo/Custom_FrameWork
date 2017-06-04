@@ -46,11 +46,18 @@ class Constants
     const path_public = __DIR__ . '/../../../../public';
 
     /**
-     * Path core
+     * Path resources
      * Without /
      * @var string
      */
-    const path_resources = __DIR__ . '/../../../Resources';
+    const path_resources = __DIR__ . '/../../../../resources';
+
+    /**
+     * Path logs
+     * Without /
+     * @var string
+     */
+    const path_logs = __DIR__ . '/../../../../logs';
 
     /**
      * Main url
