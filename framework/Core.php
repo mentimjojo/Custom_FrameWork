@@ -3,7 +3,7 @@
 /**
  * Get AutoLoader
  */
-require_once __DIR__ . '/Engine/AutoLoader/AutoLoader.php';
+require_once __DIR__ . '/Core/AutoLoader/AutoLoader.php';
 
 /**
  * Core class of the framework
