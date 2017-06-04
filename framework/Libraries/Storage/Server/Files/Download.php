@@ -29,12 +29,12 @@ class download {
     }
 
     /**
-     * Set file to download, path is automatically in public folder.
+     * Set file to download, path is automatically in Resources/Storage folder.
      * @param string $path
      */
     public function setFile(string $path){
         // Set file to download
-        $this->file = Constants::path_public . '/' . $path;
+        $this->file = Constants::path_resources . '/Storage/' . $path;
         // Save file type
         $this->type = strtolower(pathinfo($path, PATHINFO_EXTENSION));
     }
