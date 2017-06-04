@@ -82,7 +82,7 @@ class Curl
      * Execute curl
      * @return mixed
      */
-    public function execute(){
+    public function execute() : mixed{
         // Execute curl
         $execute = curl_exec(self::$curl);
         // Return execute
