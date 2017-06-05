@@ -1,5 +1,7 @@
 <?php
-class Misc {
+
+class Misc
+{
 
     /**
      * Check if a string contains one or more chars.
@@ -7,11 +9,12 @@ class Misc {
      * @param array $chars
      * @return bool
      */
-    public function checkStringOnChars(string $string, array $chars) : bool {
+    public function checkStringOnChars(string $string, array $chars): bool
+    {
         // Foreach item
-        foreach ($chars as $char){
+        foreach ($chars as $char) {
             // Check if in string
-            if(strpos($string, $char) !== false){
+            if (strpos($string, $char) !== false) {
                 // Found
                 return true;
             }
@@ -25,7 +28,8 @@ class Misc {
      * @param int $length
      * @return string
      */
-    public function generateRandomString(int $length = 25) : string {
+    public function generateRandomString(int $length = 25): string
+    {
         // Chars to random in
         $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         // Chars length
@@ -33,12 +37,13 @@ class Misc {
         // Define random string
         $rand_string = '';
         // Generate
-        for ($i = 0; $i <= $length; $i++){
-            $rand_string .= $chars[rand(0, $chars_length-1)];
+        for ($i = 0; $i <= $length; $i++) {
+            $rand_string .= $chars[rand(0, $chars_length - 1)];
         }
         // Return random string
         return $rand_string;
     }
 
 }
+
 ?>

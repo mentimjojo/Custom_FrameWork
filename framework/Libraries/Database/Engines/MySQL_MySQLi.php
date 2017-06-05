@@ -1,6 +1,7 @@
 <?php
 
-class MySQL_MySQLi {
+class MySQL_MySQLi
+{
 
     /**
      * Temp connection save
@@ -21,7 +22,7 @@ class MySQL_MySQLi {
     public function __construct(array $credentials)
     {
         // Save credentials
-        $this->credentials = (object) $credentials;
+        $this->credentials = (object)$credentials;
         // Connect
         $this->connect();
     }
@@ -29,7 +30,8 @@ class MySQL_MySQLi {
     /**
      * Connect to database with MySQLi
      */
-    private function connect(){
+    private function connect()
+    {
         // Try
         try {
             // Setup database connection
@@ -40,7 +42,7 @@ class MySQL_MySQLi {
                 $this->credentials->name,
                 $this->credentials->port
             );
-        } catch (Exception $ex){
+        } catch (Exception $ex) {
             // Return warning
             ErrorHandler::die(102, 'No database connection. Please check your credentials or is the server offline? Error: ' . $ex->getMessage());
         }
@@ -50,9 +52,10 @@ class MySQL_MySQLi {
      * Get connection
      * @return mixed
      */
-    public function getConnection(){
+    public function getConnection()
+    {
         // Check connection is set
-        if(isset($this->connection)){
+        if (isset($this->connection)) {
             // Return connection
             return $this->connection;
         } else {
@@ -66,9 +69,10 @@ class MySQL_MySQLi {
      * @param string $query
      * @return array|bool
      */
-    public function query(string $query) {
+    public function query(string $query)
+    {
         // Check query not empty
-        if(empty($query)){
+        if (empty($query)) {
             // Return
             return array('status' => false, 'msg' => 'No query filled in');
         } else {
@@ -77,7 +81,7 @@ class MySQL_MySQLi {
                 $stm = $this->connection->query($query);
                 // Return query
                 return $stm;
-            } catch (Exception $ex){
+            } catch (Exception $ex) {
                 // Return warning
                 ErrorHandler::warning(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());
             }
@@ -87,4 +91,5 @@ class MySQL_MySQLi {
     }
 
 }
+
 ?>

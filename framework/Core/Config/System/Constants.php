@@ -89,7 +89,7 @@ class Constants
         // Get url, without / on the end
         self::$url_root = $protocol . $_SERVER['HTTP_HOST'] . dirname($_SERVER['PHP_SELF']);
         // Remove last / from url
-        if(substr(self::$url_root, -1) == '/'){
+        if (substr(self::$url_root, -1) == '/') {
             // Set new url
             self::$url_root = substr(self::$url_root, 0, -1);
         }

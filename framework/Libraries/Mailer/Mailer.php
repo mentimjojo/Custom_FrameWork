@@ -55,7 +55,8 @@ class Mailer
      * Set template of the mail, default is Mail_Template.html
      * @param string $template
      */
-    public function setTemplate(string $template = 'Mail_Template.html'){
+    public function setTemplate(string $template = 'Mail_Template.html')
+    {
         // Set template
         $this->template = $template;
     }
@@ -169,14 +170,14 @@ class Mailer
      * Send the mail
      * @return stdClass
      */
-    public function send() : stdClass
+    public function send(): stdClass
     {
         // Check if all set
         if (isset($this->receiver)) {
             if (isset($this->sender)) {
                 if (isset($this->subject)) {
                     if (isset($this->message)) {
-                        if(file_exists(Constants::path_resources.'/Templates/' . $this->template)) {
+                        if (file_exists(Constants::path_resources . '/Templates/' . $this->template)) {
                             // Set headers ready
                             $this->setHeaders();
                             // Get mail template
@@ -216,7 +217,7 @@ class Mailer
             $return = array('status' => false, 'message' => 'error_no_receiver');
         }
         // Return
-        return (object) $return;
+        return (object)$return;
     }
 
 }

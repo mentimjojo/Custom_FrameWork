@@ -1,5 +1,7 @@
 <?php
-class AutoLoader {
+
+class AutoLoader
+{
 
     /**
      * AutoLoader constructor.
@@ -18,16 +20,17 @@ class AutoLoader {
      * @internal Important feature
      * @version 0.1
      */
-    public function internalLoad(string $path){
+    public function internalLoad(string $path)
+    {
         // Scan path
         $scan = array_diff(scandir($path), array('.', '..', 'Core.php', 'Resources'));
         // Foreach found item
-        foreach ($scan as $item){
+        foreach ($scan as $item) {
             // Check if item is a file
-            if(substr($item, -4) == ".php") {
+            if (substr($item, -4) == ".php") {
                 // Require file once
                 require_once $path . '/' . $item;
-            } else if(substr($item, -5) == ".html"){
+            } else if (substr($item, -5) == ".html") {
                 // Ignore
             } else {
                 // Rerun autoload on new folder
@@ -41,7 +44,8 @@ class AutoLoader {
      * @param string $path
      * @param array $filter set the filter
      */
-    public static function load(string $path, array $filter = array()){
+    public static function load(string $path, array $filter = array())
+    {
         // Setup filters, should fix dots in scan dir.
         $filter[] = '.';
         $filter[] = '..';
@@ -52,12 +56,12 @@ class AutoLoader {
         // Scan path
         $scan = array_diff(scandir($path), $filter);
         // Foreach found item
-        foreach ($scan as $item){
+        foreach ($scan as $item) {
             // Check if item is a file
-            if(substr($item, -4) == ".php") {
+            if (substr($item, -4) == ".php") {
                 // Require file
                 require_once $path . '/' . $item;
-            } else if(substr($item, -5) == ".html"){
+            } else if (substr($item, -5) == ".html") {
                 // Ignore
             } else {
                 // Rerun autoload on new folder
@@ -70,7 +74,8 @@ class AutoLoader {
      * Load public index.php
      * Always load last
      */
-    public function loadPublic(){
+    public function loadPublic()
+    {
         // Disable debug, because startup almost complete
         Settings::toggleDebug(false);
         // Load standard public, to be safe require once
@@ -80,4 +85,5 @@ class AutoLoader {
     }
 
 }
+
 ?>

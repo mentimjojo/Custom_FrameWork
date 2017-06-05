@@ -1,5 +1,7 @@
 <?php
-class download {
+
+class download
+{
 
     /**
      * Name of the download
@@ -23,7 +25,8 @@ class download {
      * Set the name of a user.
      * @param string $name
      */
-    public function setName(string $name){
+    public function setName(string $name)
+    {
         // Set name
         $this->name = $name;
     }
@@ -32,7 +35,8 @@ class download {
      * Set file to download, path is automatically in Resources/Storage folder.
      * @param string $path
      */
-    public function setFile(string $path){
+    public function setFile(string $path)
+    {
         // Set file to download
         $this->file = Constants::path_resources . '/Storage/' . $path;
         // Save file type
@@ -42,7 +46,8 @@ class download {
     /**
      * Set headers for the download
      */
-    private function setHeaders(){
+    private function setHeaders()
+    {
         // Set content file transfer
         header('Content-Description: File Transfer');
         // Set type file
@@ -74,23 +79,25 @@ class download {
      * Download the file
      * @return stdClass
      */
-    public function start() : stdClass{
+    public function start(): stdClass
+    {
         // Check if not empty
-        if(!empty($this->name)){
-            if(!empty($this->file)){
+        if (!empty($this->name)) {
+            if (!empty($this->file)) {
                 // Set headers
                 $this->setHeaders();
                 // Return
-                $return =  array('status' => true, 'message' => 'success');
+                $return = array('status' => true, 'message' => 'success');
             } else {
-                $return =  array('status' => false, 'message' => 'error_file_empty');
+                $return = array('status' => false, 'message' => 'error_file_empty');
             }
         } else {
-            $return =  array('status' => false, 'message' => 'error_name_empty');
+            $return = array('status' => false, 'message' => 'error_name_empty');
         }
         // Return object
-        return (object) $return;
+        return (object)$return;
     }
 
 }
+
 ?>

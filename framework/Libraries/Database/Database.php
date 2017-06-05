@@ -42,9 +42,10 @@ class Database
      * @param string $engine
      * @return array
      */
-    public function setEngine(string $engine) : array {
+    public function setEngine(string $engine): array
+    {
         // Check type supported
-        if(in_array(strtolower($engine), $this->engines)){
+        if (in_array(strtolower($engine), $this->engines)) {
             // Set type
             $this->engine = strtolower($engine);
             // Return true
@@ -62,7 +63,8 @@ class Database
      * @param string $srvName
      * @param int $port
      */
-    public function setMsServer(string $srvName, int $port = 1433){
+    public function setMsServer(string $srvName, int $port = 1433)
+    {
         // Save in variable
         $this->serverName = $srvName . ', ' . $port;
     }
@@ -92,9 +94,10 @@ class Database
     /**
      * Create connection
      */
-    public function createConnection(){
+    public function createConnection()
+    {
         // Switch to right Engine
-        switch ($this->engine){
+        switch ($this->engine) {
             case "pdo":
                 $this->db_engine = new MySQL_PDO($this->credentials);
                 break;
@@ -105,7 +108,7 @@ class Database
                 $this->db_engine = new MSSQL_SQLSRV($this->serverName, $this->credentials);
                 break;
             default:
-                ErrorHandler::die(101,  'Database engine not supported');
+                ErrorHandler::die(101, 'Database engine not supported');
                 break;
         }
     }
@@ -114,8 +117,9 @@ class Database
      * Get connection to create your own query system.
      * @return mixed
      */
-    public function getConnection(){
-        if(isset($this->db_engine)) {
+    public function getConnection()
+    {
+        if (isset($this->db_engine)) {
             return $this->db_engine->getConnection();
         } else {
             return null;
@@ -126,9 +130,10 @@ class Database
      * @param string $query
      * @return mixed
      */
-    public function query(string $query){
+    public function query(string $query)
+    {
         // Check if db engine exists
-        if(isset($this->db_engine)) {
+        if (isset($this->db_engine)) {
             // Create query
             $stm = $this->db_engine->query($query);
             // Return query

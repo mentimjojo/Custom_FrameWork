@@ -1,5 +1,7 @@
 <?php
-class Config {
+
+class Config
+{
 
     /**
      * Config constructor.
@@ -7,7 +9,7 @@ class Config {
     public function __construct()
     {
         // Check startup complete
-        if(!Constants::$startup_complete){
+        if (!Constants::$startup_complete) {
             // Enable debug for now
             Settings::toggleDebug(true);
         }
@@ -20,4 +22,5 @@ class Config {
     }
 
 }
+
 ?>

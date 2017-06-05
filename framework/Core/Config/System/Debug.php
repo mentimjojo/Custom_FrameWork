@@ -1,5 +1,7 @@
 <?php
-class Debug {
+
+class Debug
+{
 
     /**
      * Debug constructor.
@@ -13,9 +15,10 @@ class Debug {
     /**
      * Set debug
      */
-    private function setDebug(){
+    private function setDebug()
+    {
         // Check if debug is enabled
-        if(Constants::$debug){
+        if (Constants::$debug) {
             // Display errors
             ini_set('display_errors', 1);
             // Enable error reporting
@@ -29,4 +32,5 @@ class Debug {
     }
 
 }
+
 ?>

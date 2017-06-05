@@ -1,5 +1,7 @@
 <?php
-class Utils{
+
+class Utils
+{
 
     /**
      * Header class
@@ -25,4 +27,5 @@ class Utils{
     }
 
 }
+
 ?>

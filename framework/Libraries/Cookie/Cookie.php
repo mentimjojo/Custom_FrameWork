@@ -72,49 +72,50 @@ class Cookie
      * @param bool $override
      * @return stdClass
      */
-    public function create(bool $override) : stdClass
+    public function create(bool $override): stdClass
     {
-        if(!isset($_COOKIE[$this->name]) || $override){
+        if (!isset($_COOKIE[$this->name]) || $override) {
             // Check if name empty
-            if(!empty($this->name)){
-                if(!empty($this->value)){
-                    if($this->expire > 0){
-                        if(!empty($this->path)){
+            if (!empty($this->name)) {
+                if (!empty($this->value)) {
+                    if ($this->expire > 0) {
+                        if (!empty($this->path)) {
                             // Create cookie
-                            setcookie($this->name, $this->value, time()+$this->expire, $this->path);
+                            setcookie($this->name, $this->value, time() + $this->expire, $this->path);
                             // Return
-                            $return = array('status' => true,  'message' => 'success');
+                            $return = array('status' => true, 'message' => 'success');
                         } else {
                             // Return
-                            $return = array('status' => false,  'message' => 'error_path_empty');
+                            $return = array('status' => false, 'message' => 'error_path_empty');
                         }
                     } else {
                         // Return
-                        $return = array('status' => false,  'message' => 'error_expire_to_short');
+                        $return = array('status' => false, 'message' => 'error_expire_to_short');
                     }
                 } else {
                     // Return
-                    $return = array('status' => false,  'message' => 'error_value empty');
+                    $return = array('status' => false, 'message' => 'error_value empty');
                 }
             } else {
                 // Return
-                $return = array('status' => false,  'message' => 'error_name_empty');
+                $return = array('status' => false, 'message' => 'error_name_empty');
             }
         } else {
             // Return
-            $return = array('status' => false,  'message' => 'error_cookie_exists');
+            $return = array('status' => false, 'message' => 'error_cookie_exists');
         }
         // Return
-        return (object) $return;
+        return (object)$return;
     }
 
     /**
      * Delete cookie
      * @param string $name
      */
-    public static function delete(string $name){
+    public static function delete(string $name)
+    {
         // Delete cookie
-        setcookie($name, null, time()-3600);
+        setcookie($name, null, time() - 3600);
     }
 
     /**
@@ -124,7 +125,7 @@ class Cookie
      */
     public static function get(string $name)
     {
-        if (isset($_COOKIE[$name])){
+        if (isset($_COOKIE[$name])) {
             return $_COOKIE[$name];
         } else {
             return null;

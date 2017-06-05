@@ -53,7 +53,7 @@ class Routes
         // Block chars
         $block_chars = array('&', '#', '$', '^', '*', '(', ')', '\\', '|', ':', ';', ',', '.', '"', "'");
         // Utils
-        if(!Utils::$misc->checkStringOnChars($url, $block_chars)) {
+        if (!Utils::$misc->checkStringOnChars($url, $block_chars)) {
             // Check if route is valid
             self::$routes[$url] = $path;
         } else {
