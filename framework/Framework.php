@@ -15,7 +15,7 @@ require_once __DIR__ . '/Core/AutoLoader/AutoLoader.php';
  *
  * Class Core
  */
-class Core
+class Framework
 {
     /**
      * Instants of the AutoLoader
