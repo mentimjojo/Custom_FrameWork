@@ -4,14 +4,14 @@ class Misc {
     /**
      * Check if a string contains one or more chars.
      * @param string $string
-     * @param array $array
+     * @param array $chars
      * @return bool
      */
-    public function checkStringOnChars(string $string, array $array) : bool {
+    public function checkStringOnChars(string $string, array $chars) : bool {
         // Foreach item
-        foreach ($array as $item){
+        foreach ($chars as $char){
             // Check if in string
-            if(strpos($string, $item) !== false){
+            if(strpos($string, $char) !== false){
                 // Found
                 return true;
             }
