@@ -2,7 +2,7 @@
 class Misc {
 
     /**
-     * Check string on chars
+     * Check if a string contains one or more chars.
      * @param string $string
      * @param array $array
      * @return bool
