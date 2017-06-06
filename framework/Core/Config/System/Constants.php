@@ -53,6 +53,13 @@ class Constants
     const path_resources = __DIR__ . '/../../../../resources';
 
     /**
+     * Path storage
+     * Without /
+     * @var string
+     */
+    const path_storage = __DIR__ . '/../../../../resources/Storage';
+
+    /**
      * Main url
      * @var string
      */
