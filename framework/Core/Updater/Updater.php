@@ -22,8 +22,7 @@ class Updater
     private static $need_update = false;
 
     /**
-     * Constructor is gonna check for us if there is a new version
-     * Updater constructor.
+     * Find updates for the framework
      */
     private static function findUpdates()
     {
