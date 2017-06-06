@@ -54,7 +54,7 @@ class Upload
     public function setUploadPath(string $path)
     {
         // Set path to upload. Path is automatically in public folder
-        $this->upload_path = Constants::path_resources . '/Storage/' . $path;
+        $this->upload_path = Constants::path_resources . '/Storage/Files/' . $path;
     }
 
     /**
