@@ -32,7 +32,7 @@ If you're gonna use this framework you gonna need basic PHP, HTML and knowledge 
 
 # Documentation
 There is a large documentation available on Google drive. 
-You can it __<a href='https://drive.google.com/open?id=0B7GNGpjSFqW4WG9tN2hfUDE3U1U'>here</a>__!
+You can it __<a href="https://drive.google.com/open?id=0B7GNGpjSFqW4WG9tN2hfUDE3U1U' target='_blank'>here</a>__!
 
 # Contributors
  * T.Nijborg - Founder / Lead developer
