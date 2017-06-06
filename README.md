@@ -9,6 +9,7 @@ You can find the contributors underneath.
     - PDO
     - MySQLI
     - SQLSRV (MSSQL, Access, etc)
+    - SQLite3
 * ErrorHandler
 * Mailer
 * Storage (Files, sessions, cookies, etc)
@@ -17,12 +18,12 @@ You can find the contributors underneath.
 * __And many other features__
 
 # Requirements
-Underneath you will find the requirements of the framework.
+Underneath you find the requirements of the framework.
 
 ### Web server
 You're gonna need a web-server with the following on it.
 * PHP 7.1 (Or higher)
-* PHP CURL Extension _(For updating framework & site)_
+* PHP CURL Extension _(For API purposes, Updates, etc)_
 * PHP Database extension _(Only if you're gonna use Databases, see database list above)_
 
 ### Knowledge
@@ -31,7 +32,7 @@ If you're gonna use this framework you gonna need basic PHP, HTML and knowledge 
 
 # Documentation
 There is a large documentation available on Google drive. 
-You find it here https://drive.google.com/open?id=0B7GNGpjSFqW4WG9tN2hfUDE3U1U
+You can it __<a href='https://drive.google.com/open?id=0B7GNGpjSFqW4WG9tN2hfUDE3U1U'>here</a>__!
 
 # Contributors
  * T.Nijborg - Founder / Lead developer
