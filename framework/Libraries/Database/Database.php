@@ -32,6 +32,12 @@ class Database
     private $credentials = array();
 
     /**
+     * File name for SQLite3
+     * @var string
+     */
+    private $file_name;
+
+    /**
      * Connection
      * @var
      */
@@ -92,6 +98,18 @@ class Database
     }
 
     /**
+     * Set file name
+     * ONLY FOR SQLITE3
+     * @param string $file_name
+     */
+    public function setFileName(string $file_name){
+        /*
+         * Set file name
+         */
+        $this->file_name = $file_name;
+    }
+
+    /**
      * Create connection
      */
     public function createConnection()
@@ -107,6 +125,9 @@ class Database
             case "mssql":
                 $this->db_engine = new MSSQL_SQLSRV($this->serverName, $this->credentials);
                 break;
+            case "sqlite3":
+                $this->db_engine = new MySQL_SQLite3($this->file_name);
+                break;
             default:
                 ErrorHandler::die(101, 'Database engine not supported');
                 break;
@@ -119,9 +140,12 @@ class Database
      */
     public function getConnection()
     {
+        // Check if db engine is set
         if (isset($this->db_engine)) {
+            // Return connection
             return $this->db_engine->getConnection();
         } else {
+            // Return null
             return null;
         }
     }
