@@ -1,0 +1,5 @@
+/**
+ * In here your database files will be saved (SQLite3 for example)
+ *
+ * DO NOT EDIT THIS FOLDER
+ */
