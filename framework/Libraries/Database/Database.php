@@ -11,7 +11,7 @@ class Database
      * Supported Database engines
      * @var array
      */
-    private $engines = array("mysqli", "pdo", "mssql");
+    private $engines = array("mysqli", "pdo", "mssql", "sqlite3");
 
     /**
      * Database engine to connect

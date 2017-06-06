@@ -22,7 +22,7 @@ class MySQL_SQLite3
     public function __construct(string $file_name)
     {
         // Save credentials
-        $this->$file_name = $file_name;
+        $this->file_name = $file_name;
         // Connect
         $this->connect();
     }
@@ -35,7 +35,7 @@ class MySQL_SQLite3
         // Try
         try {
             // Create SQLite3
-            $this->connection = new SQLite3(Constants::path_storage.'/Database/' . $this->file_name);
+            $this->connection = new SQLite3(Constants::path_storage.'/Database/' . $this->file_name . '.db');
         } catch (Exception $ex) {
             // Return warning
             ErrorHandler::die(102, 'No database connection. Does to file exists? Error: ' . $ex->getMessage());
