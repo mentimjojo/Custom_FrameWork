@@ -144,11 +144,11 @@ class Updater
                         $return = array('status' => false, 'message' => 'update_error_see_log');
                     } else {
                         // Destination
-                        $destination = Constants::path_resources . '/Storage/Updates/Update-' . self::$last_version . '.zip';
+                        $destination = Constants::path_storage . '/Updates/Update-' . self::$last_version . '.zip';
                         // Check dir exists
-                        if (!is_dir(Constants::path_resources . '/Storage/Updates')) {
+                        if (!is_dir(Constants::path_storage . '/Updates')) {
                             // If not create dir
-                            mkdir(Constants::path_resources . '/Storage/Updates', 0777);
+                            mkdir(Constants::path_storage . '/Updates', 0777);
                         }
                         // Create file
                         $file = fopen($destination, "w+");
@@ -233,14 +233,14 @@ class Updater
                     // Create new zip Archive
                     $update = new ZipArchive();
                     // Open zip/update
-                    if ($update->open(Constants::path_resources . '/Storage/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
+                    if ($update->open(Constants::path_storage . '/Updates/Update-' . self::$last_version . '.zip') === TRUE) {
                         try {
                             // Extract zip/update
                             $update->extractTo(Constants::path_root);
                             // Close zip/update
                             $update->close();
                             // Update installed, now remove it
-                            unlink(Constants::path_resources . '/Storage/Updates/Update-' . self::$last_version . '.zip');
+                            unlink(Constants::path_storage . '/Updates/Update-' . self::$last_version . '.zip');
                             // Set return
                             $return = array('status' => true, 'message' => "update_installed", 'changelog' => self::$changelog);
                             // Catch exception

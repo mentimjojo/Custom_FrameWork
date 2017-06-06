@@ -38,7 +38,7 @@ class download
     public function setFile(string $path)
     {
         // Set file to download
-        $this->file = Constants::path_resources . '/Storage/Files/' . $path;
+        $this->file = Constants::path_storage . '/Files/' . $path;
         // Save file type
         $this->type = strtolower(pathinfo($path, PATHINFO_EXTENSION));
     }
