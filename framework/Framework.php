@@ -41,7 +41,10 @@ class Framework
     /**
      * Startup some needed PHP features
      */
-    private function _Startup(){
+    private function _Startup()
+    {
+        // Startup checks
+        $this->_Startup_Checks();
         // Start ob
         ob_start();
         // Start sessions
@@ -49,10 +52,23 @@ class Framework
     }
 
     /**
+     * Startup checks
+     */
+    private function _Startup_Checks()
+    {
+        // Check if php version is higher then 7.1
+        if(phpversion() < 7.1){
+            // Die the site
+            die('PHP Version is not supported. You are running ' . phpversion() . ', while the framework needs at least 7.1');
+        }
+    }
+
+    /**
      * Initialize framework
      * - Loads in this folder
      */
-    private function _Initialize_FrameWork(){
+    private function _Initialize_FrameWork()
+    {
         // Setup AutoLoader in this folder
         $this->AutoLoader = new AutoLoader(__DIR__);
         // Initialize config
@@ -68,7 +84,8 @@ class Framework
     /**
      * Load public folder
      */
-    private function _Load_Public(){
+    private function _Load_Public()
+    {
         // Load public folder
         $this->AutoLoader->loadPublic();
     }
@@ -76,7 +93,8 @@ class Framework
     /**
      * After loading is done
      */
-    private function _After(){
+    private function _After()
+    {
 
     }
 
