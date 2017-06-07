@@ -11,6 +11,8 @@ You find our contributors underneath.
     - SQLSRV (MSSQL, Access, etc)
     - SQLite3
 * ErrorHandler
+* Encryption
+    - Hashing
 * Mailer
 * Storage (Files, sessions, cookies, etc)
 * Utils package (For handy features)

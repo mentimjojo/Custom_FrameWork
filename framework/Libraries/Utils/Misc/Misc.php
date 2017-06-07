@@ -25,13 +25,17 @@ class Misc
 
     /**
      * Generate random string, default is 25 chars
-     * @param int $length
+     * @param int $length the length of the string
+     * @param string $chars Chars to generate the string with.
+     * Default chars are '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*()'
      * @return string
      */
-    public function generateRandomString(int $length = 25): string
+    public function generateRandomString(int $length = 25, string $chars = ''): string
     {
-        // Chars to random in
-        $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        // Check if chars empty
+        if(empty($chars)){
+            $chars = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&*()';
+        }
         // Chars length
         $chars_length = strlen($chars);
         // Define random string
