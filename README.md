@@ -22,7 +22,7 @@ Underneath you find the requirements of the framework.
 
 ### Web server
 You're gonna need a web-server with the following on it.
-* PHP 7.1 (Or higher)
+* PHP >= 7.1 
 * PHP CURL Extension _(For API purposes, Updates, etc)_
 * PHP Database extension _(Only if you're gonna use Databases, see database list above)_
 
