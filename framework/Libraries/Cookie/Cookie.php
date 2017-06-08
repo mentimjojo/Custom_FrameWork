@@ -72,7 +72,7 @@ class Cookie
      * @param bool $override
      * @return stdClass
      */
-    public function create(bool $override): stdClass
+    public function create(bool $override = false): stdClass
     {
         if (!isset($_COOKIE[$this->name]) || $override) {
             // Check if name empty
