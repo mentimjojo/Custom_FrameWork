@@ -64,10 +64,12 @@ class MySQL_PDO
 
     /**
      * Run query
+     * You can add params
      * @param string $query
+     * @param array $params
      * @return array|bool
      */
-    public function query(string $query)
+    public function query(string $query, array $params = array())
     {
         // Check query not empty
         if (empty($query)) {
@@ -78,9 +80,10 @@ class MySQL_PDO
                 // Prepare query
                 $stm = $this->connection->prepare($query);
                 // Execute query
-                $stm->execute();
+                $stm->execute($params);
                 // Return query
                 return $stm;
+                // Catch
             } catch (Exception $ex) {
                 // Return warning
                 ErrorHandler::warning(103, 'Query: ' . $query . ' has failed: ' . $ex->getMessage());

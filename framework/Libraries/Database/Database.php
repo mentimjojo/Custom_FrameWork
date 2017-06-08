@@ -4,8 +4,13 @@
  * Created by T.Nijborg
  * Class Database
  */
-class Database
+class Database extends ConnectionPool
 {
+
+    /**
+     * @var string
+     */
+    private $name;
 
     /**
      * Supported Database engines
@@ -42,6 +47,16 @@ class Database
      * @var
      */
     private $db_engine;
+
+    /**
+     * Set name of the database
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        // Set name
+        $this->name = $name;
+    }
 
     /**
      * Set database type
@@ -102,7 +117,8 @@ class Database
      * ONLY FOR SQLITE3
      * @param string $file_name
      */
-    public function setFileName(string $file_name){
+    public function setFileName(string $file_name)
+    {
         /*
          * Set file name
          */
@@ -132,6 +148,17 @@ class Database
                 ErrorHandler::die(101, 'Database engine not supported');
                 break;
         }
+        // Save database object
+        self::create($this->name, $this->db_engine);
+    }
+
+    /**
+     * Set this database as global for query's, etc.
+     */
+    public function setGlobal()
+    {
+        // Set this as global
+        self::global($this->name);
     }
 
     /**
@@ -149,26 +176,6 @@ class Database
             return null;
         }
     }
-
-    /**
-     * @param string $query
-     * @return mixed
-     */
-    public function query(string $query)
-    {
-        // Check if db engine exists
-        if (isset($this->db_engine)) {
-            // Create query
-            $stm = $this->db_engine->query($query);
-            // Return query
-            return $stm;
-        } else {
-            // Return error
-            return null;
-        }
-    }
-
-
 }
 
 ?>
