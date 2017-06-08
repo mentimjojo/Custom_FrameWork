@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class ConnectionPool
+ * @Author T.Nijborg
+ * @Version 0.1
+ */
 class ConnectionPool
 {
 

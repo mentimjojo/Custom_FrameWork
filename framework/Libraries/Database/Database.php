@@ -1,8 +1,9 @@
 <?php
 
 /**
- * Created by T.Nijborg
  * Class Database
+ * @Author T.Nijborg
+ * @Version 0.3
  */
 class Database extends ConnectionPool
 {

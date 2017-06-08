@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class SQL
+ * @Author T.Nijborg
+ * @Version 0.1
+ */
 class SQL extends ConnectionPool
 {
 
