@@ -54,7 +54,7 @@ class SQL extends ConnectionPool
     }
 
     /**
-     * Return
+     * Execute the query, and return result.
      * @return array
      */
     public static function execute(){
