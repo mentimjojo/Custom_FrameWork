@@ -27,6 +27,12 @@ class SQL extends ConnectionPool
     private static $params = array();
 
     /**
+     * Query statement
+     * @var
+     */
+    private static $statement;
+
+    /**
      * Set connection to use
      * @param string $name
      */
@@ -54,7 +60,7 @@ class SQL extends ConnectionPool
     }
 
     /**
-     * Execute the query, and return result.
+     * Execute the query,
      * @return array
      */
     public static function execute(){
@@ -65,13 +71,13 @@ class SQL extends ConnectionPool
                 // Check if PDO
                 if (is_a(self::get(self::$use_connection), 'MySQL_PDO')) {
                     // Setup statement
-                    $stm = self::get(self::$use_connection)->query(self::$query, self::$params);
+                    self::$statement = self::get(self::$use_connection)->query(self::$query, self::$params);
                 } else {
                     // Setup statement
-                    $stm = self::get(self::$use_connection)->query(self::$query);
+                    self::$statement = self::get(self::$use_connection)->query(self::$query);
                 }
                 // Return stm
-                $return = $stm;
+                $return = array('status' => true, 'message' => 'success_query_run');
                 // Set connection back
                 self::$use_connection = '';
             } else {
@@ -84,6 +90,15 @@ class SQL extends ConnectionPool
         }
         // Return
         return $return;
+    }
+
+    /**
+     * Get return from query.
+     * @return mixed
+     */
+    public static function getReturn(){
+        // Return query statement
+        return self::$statement;
     }
 
 }
