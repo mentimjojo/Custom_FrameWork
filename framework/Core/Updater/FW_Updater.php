@@ -1,10 +1,9 @@
 <?php
 
 /**
- * Created by PhpStorm.
- * User: timni
- * Date: 6/11/2017
- * Time: 13:07
+ * Class FW_Updater
+ * @Author T.Nijborg
+ * @Version 0.1
  */
 class FW_Updater extends Updater_API_GitHub
 {
@@ -51,6 +50,10 @@ class FW_Updater extends Updater_API_GitHub
         }
     }
 
+    /**
+     * Install update
+     * @return object
+     */
     public static function installUpdate()
     {
         // Find update

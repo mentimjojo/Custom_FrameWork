@@ -1,5 +1,10 @@
 <?php
 
+/**
+ * Class Updater_API_GitHub
+ * @Author T.Nijborg
+ * @Version 0.1
+ */
 class Updater_API_GitHub
 {
 
@@ -193,7 +198,7 @@ class Updater_API_GitHub
                         $file = fopen($destination, "w+");
                         // Set data
                         fputs($file, $download);
-                        // Close
+                        // Close?
                         fclose($file);
                         // Send success
                         $return = array('status' => true, 'message' => 'download_success');
