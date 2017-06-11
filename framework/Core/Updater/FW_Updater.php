@@ -38,7 +38,7 @@ class FW_Updater extends Updater_API_GitHub
         if ($latest != null) {
             // Check if update needed
             if ($latest->version > Constants::fw_version) {
-                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version, 'changelog' => $latest->description);
+                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version, 'changelog' => nl2br($latest->description));
             } else {
                 return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
             }
