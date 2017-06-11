@@ -10,7 +10,7 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Get current
-     * @return array
+     * @return object|null
      */
     public static function getCurrent()
     {
@@ -19,7 +19,7 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Get latest
-     * @return array|null
+     * @return object|null
      */
     public static function getLatest()
     {
@@ -38,7 +38,7 @@ class FW_Updater extends Updater_API_GitHub
         if ($latest != null) {
             // Check if update needed
             if ($latest->version > Constants::fw_version) {
-                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
+                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version, 'changelog' => $latest->description);
             } else {
                 return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
             }

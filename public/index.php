@@ -6,5 +6,7 @@
  */
 Settings::toggleDebug(true);
 echo '<br/><br/>';
+var_dump(FW_Updater::findUpdate());
+echo '<br/><br/>';
 var_dump(FW_Updater::installUpdate());
 ?>
