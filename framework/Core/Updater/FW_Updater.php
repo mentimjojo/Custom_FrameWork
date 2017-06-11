@@ -87,9 +87,9 @@ class FW_Updater extends Updater_API_GitHub
 
                             // Update extracted, now remove it
                             unlink(Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip');
-                            // Now find dire
+                            // Now find dir where install is placed temp
                             $dir = array_diff(scandir($temp_folder), array('.', '..'));
-                            // Foreach
+                            // Foreach in temp dir
                             foreach ($dir as $dir_temp) {
                                 // Check if update folder
                                 if (is_dir($temp_folder . '/' . $dir_temp)) {
