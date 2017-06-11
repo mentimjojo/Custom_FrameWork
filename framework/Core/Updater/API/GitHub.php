@@ -93,7 +93,7 @@ class Updater_API_GitHub
 
     /**
      * Get latest release
-     * @return array|null
+     * @return object|null
      */
     protected static function getLatest()
     {
@@ -109,7 +109,7 @@ class Updater_API_GitHub
                 'description' => $release->body
             );
             // Return latest
-            return $latest;
+            return (object) $latest;
         } else {
             return null;
         }
@@ -117,7 +117,7 @@ class Updater_API_GitHub
 
     /**
      * Get current release
-     * @return array
+     * @return object
      */
     protected static function getCurrent()
     {
@@ -141,7 +141,7 @@ class Updater_API_GitHub
                 }
             }
             // Return release
-            return $current;
+            return (object) $current;
         } else {
             // Return null
             return null;
@@ -158,8 +158,6 @@ class Updater_API_GitHub
         $latest = self::getLatestRelease();
         // Check if not null
         if ($latest !== null) {
-            // Object
-            $latest = (object)$latest;
             // Check for update
             if ($latest->tag_name > Constants::fw_version) {
                 // Try

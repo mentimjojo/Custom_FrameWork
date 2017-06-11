@@ -28,7 +28,7 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Find update
-     * @return array|null
+     * @return object|null
      */
     public static function findUpdate()
     {
@@ -36,13 +36,11 @@ class FW_Updater extends Updater_API_GitHub
         $latest = parent::getLatest();
         // Check not null
         if ($latest != null) {
-            // Create object
-            $latest = (object)$latest;
             // Check if update needed
             if ($latest->version > Constants::fw_version) {
-                return array('update_available' => true, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
+                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
             } else {
-                return array('update_available' => false, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
+                return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
             }
         } else {
             // Return null
@@ -60,8 +58,6 @@ class FW_Updater extends Updater_API_GitHub
         $update = self::findUpdate();
         // Check if not null
         if ($update !== null) {
-            // Object
-            $update = (object)$update;
             // Check if update needed
             if ($update->update_available) {
                 // Download update
