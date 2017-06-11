@@ -75,6 +75,8 @@ class Framework
         new Config();
         // Initialize error handler
         new ErrorHandler();
+        // Initialize Updater
+        new FW_Updater();
         // Initialize routes
         new Routes();
         // Initialize routes

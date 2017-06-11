@@ -9,6 +9,12 @@ class Curl
     private static $curl;
 
     /**
+     * Return
+     * @var mixed
+     */
+    private static $return;
+
+    /**
      * Setup curl
      * Curl constructor.
      */
@@ -46,10 +52,19 @@ class Curl
     }
 
     /**
+     * Set user agent
+     * @param string $user_agent
+     */
+    public function setUserAgent(string $user_agent){
+        // Set user agent
+        curl_setopt(self::$curl, CURLOPT_USERAGENT, $user_agent);
+    }
+
+    /**
      * Set post for the curl
      * @param mixed $data
      */
-    public function setPOST(mixed $data)
+    public function setPOST($data)
     {
         if (!empty($data)) {
             // Set curl on post
@@ -57,6 +72,15 @@ class Curl
             // Send the data to the api
             curl_setopt(self::$curl, CURLOPT_POSTFIELDS, $data);
         }
+    }
+
+    /**
+     * Follow location
+     * @param bool $follow
+     */
+    public function followLocation(bool $follow){
+        // Follow location
+        curl_setopt(self::$curl, CURLOPT_FOLLOWLOCATION, $follow);
     }
 
     /**
@@ -81,14 +105,20 @@ class Curl
 
     /**
      * Execute curl
-     * @return mixed
      */
     public function execute()
     {
         // Execute curl
-        $execute = curl_exec(self::$curl);
-        // Return execute
-        return $execute;
+        self::$return = curl_exec(self::$curl);
+    }
+
+    /**
+     * Get return
+     * @return mixed
+     */
+    public function getReturn(){
+        // Get return
+        return self::$return;
     }
 
     /**

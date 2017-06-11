@@ -1,0 +1,3 @@
+/**
+ * Here will be extracted the updates to. Do not delete this folder.
+ */
