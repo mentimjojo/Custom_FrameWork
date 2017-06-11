@@ -38,9 +38,9 @@ class FW_Updater extends Updater_API_GitHub
         if ($latest != null) {
             // Check if update needed
             if ($latest->version > Constants::fw_version) {
-                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
+                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
             } else {
-                return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'newest_version' => $latest->version);
+                return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
             }
         } else {
             // Return null
@@ -74,7 +74,7 @@ class FW_Updater extends Updater_API_GitHub
                     // Zip archive
                     $zip = new ZipArchive();
                     // Open
-                    if ($zip->open(Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip') === true) {
+                    if ($zip->open(Constants::path_storage . '/Updates/Update-' . $update->latest_version . '.zip') === true) {
                         try {
                             // Extract to
                             $zip->extractTo($temp_folder);
@@ -82,7 +82,7 @@ class FW_Updater extends Updater_API_GitHub
                             $zip->close();
 
                             // Update extracted, now remove it
-                            unlink(Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip');
+                            unlink(Constants::path_storage . '/Updates/Update-' . $update->latest_version . '.zip');
                             // Now find dir where install is placed temp
                             $dir = array_diff(scandir($temp_folder), array('.', '..'));
                             // Foreach in temp dir
@@ -106,7 +106,7 @@ class FW_Updater extends Updater_API_GitHub
                                     }
 
                                     // Create new install zip
-                                    Utils::$zip->create($temp_folder . '/' . $dir_temp . '/', Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip');
+                                    Utils::$zip->create($temp_folder . '/' . $dir_temp . '/', Constants::path_storage . '/Updates/Update-' . $update->latest_version . '.zip');
                                     // Delete temp update, check first if exists
                                     if (is_dir($temp_folder . '/' . $dir_temp)) {
                                         // Delete public folder
@@ -117,13 +117,13 @@ class FW_Updater extends Updater_API_GitHub
                             // Now lets install
                             $install = new ZipArchive();
                             // Open zip
-                            if ($install->open(Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip') === true) {
+                            if ($install->open(Constants::path_storage . '/Updates/Update-' . $update->latest_version . '.zip') === true) {
                                 // Extract to
                                 $install->extractTo(Constants::path_root);
                                 // Close zip/update
                                 $install->close();
                                 // Update extracted, now remove it
-                                unlink(Constants::path_storage . '/Updates/Update-' . $update->newest_version . '.zip');
+                                unlink(Constants::path_storage . '/Updates/Update-' . $update->latest_version . '.zip');
                                 // Set return
                                 $return = array('status' => true, 'message' => 'success', 'error' => 'Update installed successfully');
                             } else {
