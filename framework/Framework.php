@@ -59,7 +59,7 @@ class Framework
         // Check if php version is higher then 7.1
         if(phpversion() < 7.1){
             // Die the website/app
-            die(require_once __DIR__ . '/../resources/Templates/Die_php.php');
+            die(require_once __DIR__ . '/../resources/Templates/Error_PHP_die.php');
         }
     }
 
