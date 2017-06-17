@@ -59,7 +59,7 @@ class Framework
         // Check if php version is higher then 7.1
         if(phpversion() < 7.1){
             // Die the website/app
-            die('PHP Version is not supported. You are running <b>' . phpversion() . '</b>, while the framework needs <b>7.1</b> or higher!');
+            die(require_once __DIR__ . '/../resources/Templates/Die_php.php');
         }
     }
 
@@ -97,7 +97,7 @@ class Framework
      */
     private function _After()
     {
-
+        // Empty for now
     }
 
 }
