@@ -53,9 +53,7 @@ class FW_Updater extends Updater_API_GitHub
         $upcoming_release = array();
         // Foreach release
         foreach ($releases as $release) {
-            echo 1;
             if ($release->draft) {
-                echo 2;
                 $upcoming_release = (object)array(
                     'id' => $release->id,
                     'name' => $release->name,
