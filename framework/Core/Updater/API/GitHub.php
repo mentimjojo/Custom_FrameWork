@@ -65,7 +65,7 @@ class Updater_API_GitHub
      * Get releases
      * @return mixed|null
      */
-    private static function getReleases()
+    protected static function getReleases()
     {
         // Setup Curl
         $curl = new Curl();

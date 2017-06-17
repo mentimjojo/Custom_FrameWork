@@ -10,6 +10,7 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Get current
+     *
      * @return object|null
      */
     public static function getCurrent()
@@ -19,6 +20,7 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Get latest
+     *
      * @return object|null
      */
     public static function getLatest()
@@ -27,7 +29,80 @@ class FW_Updater extends Updater_API_GitHub
     }
 
     /**
+     * Get one release
+     *
+     * @param string $version
+     * @return stdClass
+     */
+    public static function getOneRelease(string $version): stdClass
+    {
+        // Get one release
+        return self::getReleases(true)->$version;
+    }
+
+    /**
+     * Get upcoming release
+     *
+     * @return stdClass
+     */
+    public static function getUpcomingRelease(): stdClass
+    {
+        // Releases
+        $releases = self::getReleases(true);
+        // Upcoming release
+        $upcoming_release = array();
+        // Foreach release
+        foreach ($releases as $release) {
+            echo 1;
+            if ($release->draft) {
+                echo 2;
+                $upcoming_release = (object)array(
+                    'id' => $release->id,
+                    'name' => $release->name,
+                    'version' => $release->version,
+                    'description' => $release->description
+                );
+            }
+        }
+        // Return array (object)
+        return (object)$upcoming_release;
+    }
+
+    /**
+     * Get all releases
+     *
+     * @param bool $upcoming true/false if the releases also shows upcoming release(s)
+     * @return stdClass
+     */
+    public static function getReleases(bool $upcoming = false): stdClass
+    {
+        // Releases
+        $releases = parent::getReleases();
+        // Array with releases
+        $array_releases = array();
+        // Foreach release
+        foreach ($releases as $release) {
+            if ($release->draft && !$upcoming) {
+                // Skip this release
+                continue;
+            }
+            // Put release in array
+            $array_releases[$release->tag_name] = (object)array(
+                'id' => $release->id,
+                'name' => $release->name,
+                'version' => $release->tag_name,
+                'description' => $release->body,
+                'draft' => $release->draft
+            );
+        }
+        // Return array (object)
+        return (object)$array_releases;
+    }
+
+
+    /**
      * Find update
+     *
      * @return object|null
      */
     public static function findUpdate()
@@ -38,9 +113,9 @@ class FW_Updater extends Updater_API_GitHub
         if ($latest != null) {
             // Check if update needed
             if ($latest->version > Constants::fw_version) {
-                return (object) array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version, 'changelog' => $latest->description);
+                return (object)array('update_available' => true, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version, 'changelog' => $latest->description);
             } else {
-                return (object) array('update_available' => false, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
+                return (object)array('update_available' => false, 'current_version' => Constants::fw_version, 'latest_version' => $latest->version);
             }
         } else {
             // Return null
@@ -50,9 +125,10 @@ class FW_Updater extends Updater_API_GitHub
 
     /**
      * Install update
-     * @return object
+     *
+     * @return stdClass
      */
-    public static function installUpdate()
+    public static function installUpdate(): stdClass
     {
         // Find update
         $update = self::findUpdate();
@@ -151,7 +227,7 @@ class FW_Updater extends Updater_API_GitHub
             $return = array('status' => false, 'message' => 'error_unknown');
         }
 
-        return (object) $return;
+        return (object)$return;
     }
 
 }
