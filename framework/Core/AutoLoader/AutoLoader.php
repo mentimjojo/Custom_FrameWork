@@ -30,8 +30,6 @@ class AutoLoader
             if (substr($item, -4) == ".php") {
                 // Require file once
                 require_once $path . '/' . $item;
-            } else if (substr($item, -5) == ".html") {
-                // Ignore
             } else {
                 // Rerun autoload on new folder
                 $this->internalLoad($path . '/' . $item);
