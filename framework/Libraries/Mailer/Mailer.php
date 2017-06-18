@@ -5,66 +5,80 @@ class Mailer
 
     /**
      * Sender of the email and sender name
+     *
      * @var string
      */
     private $sender;
 
     /**
      * Receiver of the email
+     *
      * @var string
      */
     private $receiver;
 
     /**
      * The cc of the email
+     *
      * @var string
      */
     private $cc;
 
     /**
      * The bcc of the email
+     *
      * @var string
      */
     private $bcc;
 
     /**
      * Subject of the email
+     *
      * @var string
      */
     private $subject;
 
     /**
      * Message of the mail
+     *
      * @var string
      */
     private $message;
 
     /**
      * Set headers of the email
+     *
      * @var array
      */
     private $headers;
 
     /**
      * Mail template
+     *
      * @var string
      */
     private $template = 'Mail_Template.html';
 
     /**
      * Set template of the mail, default is Mail_Template.html
-     * @param string $template
+     *
+     * @param  string $template
+     * @return $this
      */
     public function setTemplate(string $template = 'Mail_Template.html')
     {
         // Set template
         $this->template = $template;
+        // Return this
+        return $this;
     }
 
     /**
      * Set sender of the mail
-     * @param string $sender_name
-     * @param string $sender_email
+     *
+     * @param  string $sender_name
+     * @param  string $sender_email
+     * @return $this
      */
     public function setSender(string $sender_name, string $sender_email)
     {
@@ -73,12 +87,15 @@ class Mailer
             'name' => $sender_name,
             'email' => $sender_email
         );
+        // Return this
+        return $this;
     }
 
     /**
      * Set cc receiver
-     * @param string $cc_name
-     * @param string $cc_email
+     * @param  string $cc_name
+     * @param  string $cc_email
+     * @return $this
      */
     public function setCC(string $cc_name, string $cc_email)
     {
@@ -87,12 +104,16 @@ class Mailer
             'name' => $cc_name,
             'email' => $cc_email
         );
+        // Return this
+        return $this;
     }
 
     /**
      * Set bcc
+     *
      * @param string $bcc_name
      * @param string $bcc_email
+     * @return $this
      */
     public function setBCC(string $bcc_name, string $bcc_email)
     {
@@ -101,12 +122,16 @@ class Mailer
             'name' => $bcc_name,
             'email' => $bcc_email
         );
+        // Return this
+        return $this;
     }
 
     /**
      * Set receiver of the email
+     *
      * @param string $receiver_name
      * @param string $receiver_email
+     * @return $this
      */
     public function setReceiver(string $receiver_name, string $receiver_email)
     {
@@ -115,26 +140,36 @@ class Mailer
             'name' => $receiver_name,
             'email' => $receiver_email
         );
+        // Return this
+        return $this;
     }
 
     /**
      * Set subject of the mail
+     *
      * @param string $subject
+     * @return $this
      */
     public function setSubject(string $subject)
     {
         // Set subject
         $this->subject = $subject;
+        // Return this
+        return $this;
     }
 
     /**
      * Set message of the email
+     *
      * @param string $message
+     * @return $this
      */
     public function setMessage(string $message)
     {
         // Set message
         $this->message = $message;
+        // Return this
+        return $this;
     }
 
     /**
