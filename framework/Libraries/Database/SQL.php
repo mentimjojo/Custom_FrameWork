@@ -67,14 +67,14 @@ class SQL extends ConnectionPool
         // Check if everything is ok.
         if(!empty(self::$query)){
             // Check if exists
-            if(!isset(self::get(self::$use_connection)->status)) {
+            if(!isset(parent::get(self::$use_connection)->status)) {
                 // Check if PDO
-                if (is_a(self::get(self::$use_connection), 'MySQL_PDO')) {
+                if (is_a(parent::get(self::$use_connection), 'MySQL_PDO')) {
                     // Setup statement
-                    self::$statement = self::get(self::$use_connection)->query(self::$query, self::$params);
+                    self::$statement = parent::get(self::$use_connection)->query(self::$query, self::$params);
                 } else {
                     // Setup statement
-                    self::$statement = self::get(self::$use_connection)->query(self::$query);
+                    self::$statement = parent::get(self::$use_connection)->query(self::$query);
                 }
                 // Return stm
                 $return = array('status' => true, 'message' => 'success_query_run');

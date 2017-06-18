@@ -25,7 +25,7 @@ class ConnectionPool
      * @param string $name
      * @param $connection
      */
-    protected static function create(string $name, $connection)
+    final protected static function create(string $name, $connection)
     {
         // Save connection
         self::$connections[$name] = $connection;
@@ -36,7 +36,7 @@ class ConnectionPool
      * @param string $name
      * @return stdClass
      */
-    protected static function global(string $name): stdClass
+    final protected static function global(string $name): stdClass
     {
         // Check isset
         if (isset(self::$connections[$name])) {
@@ -57,7 +57,7 @@ class ConnectionPool
      * @param string $name
      * @return stdClass
      */
-    protected static function get(string $name = '')
+    final protected static function get(string $name = '')
     {
         // Check empty
         if(empty($name)){

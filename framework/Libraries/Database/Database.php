@@ -150,7 +150,7 @@ class Database extends ConnectionPool
                 break;
         }
         // Save database object
-        self::create($this->name, $this->db_engine);
+        parent::create($this->name, $this->db_engine);
     }
 
     /**
@@ -159,7 +159,7 @@ class Database extends ConnectionPool
     public function setGlobal()
     {
         // Set this as global
-        self::global($this->name);
+        parent::global($this->name);
     }
 
     /**
