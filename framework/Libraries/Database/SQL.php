@@ -10,64 +10,85 @@ class SQL extends ConnectionPool
 
     /**
      * Set connection to use
+     *
      * @var string
      */
     private static $use_connection = '';
 
     /**
      * Set Query
+     *
      * @var string
      */
     private static $query;
 
     /**
      * Set params
+     *
      * @var array
      */
     private static $params = array();
 
     /**
      * Query statement
+     *
      * @var
      */
     private static $statement;
 
     /**
      * Set connection to use
+     *
      * @param string $name
+     * @return static
      */
-    public static function connection(string $name){
+    public static function connection(string $name)
+    {
         // Set connection
         self::$use_connection = $name;
+        // Return self
+        return new static();
     }
 
     /**
      * Set query
+     *
      * @param string $query
+     * @return static
      */
-    public static function setQuery(string $query){
+    public static function setQuery(string $query)
+    {
         // Set query
         self::$query = $query;
+        // Return self
+        return new static();
     }
 
     /**
      * Set params
+     *
      * @param array $params
+     * @return static
      */
-    public static function setParams(array $params){
+    public static function setParams(array $params)
+    {
         // Set params
         self::$params = $params;
+        // Return self
+        return new static();
     }
 
     /**
-     * Execute the query,
-     * @return array
+     * Execute the query
+     *
+     * @return stdClass
      */
-    public static function execute(){
+    public static function execute(): stdClass
+    {
         // Check if everything is ok.
-        if(!empty(self::$query)){
+        if (!empty(self::$query)) {
             // Check if exists
-            if(!isset(parent::get(self::$use_connection)->status)) {
+            if (!isset(parent::get(self::$use_connection)->status)) {
                 // Check if PDO
                 if (is_a(parent::get(self::$use_connection), 'MySQL_PDO')) {
                     // Setup statement
@@ -89,14 +110,16 @@ class SQL extends ConnectionPool
             $return = array('status' => false, 'message' => 'error_query_empty');
         }
         // Return
-        return $return;
+        return (object)$return;
     }
 
     /**
      * Get return from query.
+     *
      * @return mixed
      */
-    public static function getReturn(){
+    public static function getReturn()
+    {
         // Return query statement
         return self::$statement;
     }
