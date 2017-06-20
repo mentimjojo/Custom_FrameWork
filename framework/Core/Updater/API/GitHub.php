@@ -28,7 +28,7 @@ class Updater_API_GitHub
     private static function api_url(string $url): string
     {
         // Setup Access token + url
-        return self::$api_url . '/' . $url . '?access_token=' . Constants::GitHub_API_Access_Token;
+        return self::$api_url . '/' . $url;
     }
 
     /**

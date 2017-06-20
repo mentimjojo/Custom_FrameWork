@@ -53,7 +53,7 @@ class FW_Updater extends Updater_API_GitHub
         $upcoming_release = array();
         // Foreach release
         foreach ($releases as $release) {
-            if ($release->draft) {
+            if ($release->pre_release) {
                 $upcoming_release = (object)array(
                     'id' => $release->id,
                     'name' => $release->name,
@@ -90,7 +90,7 @@ class FW_Updater extends Updater_API_GitHub
                 'name' => $release->name,
                 'version' => $release->tag_name,
                 'description' => $release->body,
-                'draft' => $release->draft
+                'pre_release' => $release->prerelease
             );
         }
         // Return array (object)

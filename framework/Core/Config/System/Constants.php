@@ -72,18 +72,11 @@ class Constants
     public static $url_public;
 
     /**
-     * The updater url
-     * @var string
-     */
-    const cfw_api_url = 'https://fw-system.timnijborg.com';
-
-    /**
      * The GitHub API Url ( Without / )
      * The GitHub API access token
      * @var string
      */
     const GitHub_API_Url = 'https://api.github.com';
-    const GitHub_API_Access_Token = '07f5c0bc649138ff8b6a5ee80b9083826474a562';
 
     /**
      * Constants constructor.
