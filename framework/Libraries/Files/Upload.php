@@ -148,7 +148,7 @@ class Upload
         // Make file object
         $file = (object)$file['file'];
         // Target name
-        $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
+        $target_name = Utils::$misc->generateRandomString(rand(25, 50), '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') . '-' . $file->name;
         // Target file
         $target_file = $this->upload_path . '/' . $target_name;
         // Get file type
@@ -223,7 +223,7 @@ class Upload
                     // Set file as object
                     $file = (object)$file;
                     // Target name
-                    $target_name = Utils::$misc->generateRandomString(rand(25, 50)) . '-' . $file->name;
+                    $target_name = Utils::$misc->generateRandomString(rand(25, 50), '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') . '-' . $file->name;
                     // Target file
                     $target_file = $this->upload_path . '/' . $target_name;
                     // Get file type
