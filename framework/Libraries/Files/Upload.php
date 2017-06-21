@@ -36,12 +36,6 @@ class Upload
     private $max_files = 10;
 
     /**
-     * If user can upload multiple or not. Default is false
-     * @var bool
-     */
-    private $multiple = false;
-
-    /**
      * The upload path
      * @var string
      */
@@ -50,56 +44,72 @@ class Upload
     /**
      * Set path where to upload the files to. Path is automatically inside Resources/Storage folder.
      * @param string $path
+     * @return $this
      */
     public function setUploadPath(string $path)
     {
         // Set path to upload. Path is automatically in public folder
         $this->upload_path = Constants::path_storage . '/Files/' . $path;
+        // Return this object
+        return $this;
     }
 
     /**
      * Set the minimum size of the file(s)
      * @param int $size in MB's
+     * @return $this
      */
     public function setMinSize(int $size = 50)
     {
         // Set min size
         $this->min_size = $size * 1048576;
+        // Return this object
+        return $this;
     }
 
     /**
      * Set the maximum size of the file(s)
      * @param int $size in MB's
+     * @return $this
      */
     public function setMaxSize(int $size = 50)
     {
         // Set max size
         $this->max_size = $size * 1048576;
+        // Return this object
+        return $this;
     }
 
     /**
      * Set the minimum count of files.
      * @param int $min
+     * @return $this
      */
     public function setMinFiles(int $min = 0)
     {
         // Set min files
         $this->min_files = $min;
+        // Return this object
+        return $this;
     }
 
     /**
      * Set the maximum count of files.
      * @param int $max
+     * @return $this
      */
     public function setMaxFiles(int $max = 10)
     {
         // Set max files
         $this->max_files = $max;
+        // Return this object
+        return $this;
     }
 
     /**
      * Set the file types allowed.
      * @param array $types
+     * @return $this
      */
     public function setFileTypes(array $types)
     {
@@ -109,16 +119,8 @@ class Upload
         }
         // Set the file types
         $this->file_types = $types;
-    }
-
-    /**
-     * Set if user can upload multiple files at the same time or not.
-     * @param bool $toggle
-     */
-    public function setMultiple(bool $toggle = false)
-    {
-        // Set multiple files or not
-        $this->multiple = $toggle;
+        // Return this object
+        return $this;
     }
 
     /**
@@ -129,7 +131,7 @@ class Upload
     public function send(array $upload)
     {
         // Check multiple
-        if ($this->multiple) {
+        if ($this->max_files > 1) {
             $return = $this->upload_multiple($upload);
         } else {
             $return = $this->upload_one($upload);
@@ -156,7 +158,7 @@ class Upload
         // Check exists first
         if (!file_exists($target_file)) {
             // Check if file type is allowed
-            if (in_array($target_type, $this->file_types)) {
+            if (in_array(strtolower($target_type), $this->file_types)) {
                 // Check file size to big
                 if ($file->size <= $this->max_size) {
                     // Check file size to small
@@ -231,7 +233,7 @@ class Upload
                     // Check exists first
                     if (!file_exists($target_file)) {
                         // Check if file type is allowed
-                        if (in_array($target_type, $this->file_types)) {
+                        if (in_array(strtolower($target_type), $this->file_types)) {
                             // Check file size to big
                             if ($file->size <= $this->max_size) {
                                 // Check file size to small
