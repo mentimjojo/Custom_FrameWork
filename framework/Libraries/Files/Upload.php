@@ -42,7 +42,14 @@ class Upload
     private $upload_path;
 
     /**
+     * Return
+     * @var
+     */
+    private $return;
+
+    /**
      * Set path where to upload the files to. Path is automatically inside Resources/Storage folder.
+     *
      * @param string $path
      * @return $this
      */
@@ -56,6 +63,7 @@ class Upload
 
     /**
      * Set the minimum size of the file(s)
+     *
      * @param int $size in MB's
      * @return $this
      */
@@ -69,6 +77,7 @@ class Upload
 
     /**
      * Set the maximum size of the file(s)
+     *
      * @param int $size in MB's
      * @return $this
      */
@@ -82,6 +91,7 @@ class Upload
 
     /**
      * Set the minimum count of files.
+     *
      * @param int $min
      * @return $this
      */
@@ -95,6 +105,7 @@ class Upload
 
     /**
      * Set the maximum count of files.
+     *
      * @param int $max
      * @return $this
      */
@@ -108,6 +119,7 @@ class Upload
 
     /**
      * Set the file types allowed.
+     *
      * @param array $types
      * @return $this
      */
@@ -125,23 +137,32 @@ class Upload
 
     /**
      * Upload files
+     *
      * @param array $upload
-     * @return stdClass
      */
     public function send(array $upload)
     {
         // Check multiple
         if ($this->max_files > 1) {
-            $return = $this->upload_multiple($upload);
+            $this->return = $this->upload_multiple($upload);
         } else {
-            $return = $this->upload_one($upload);
+            $this->return = $this->upload_one($upload);
         }
-        // Return array
-        return $return;
+    }
+
+    /**
+     * Get return of the upload
+     *
+     * @return mixed
+     */
+    public function getReturn(){
+        // Return
+        return $this->return;
     }
 
     /**
      * Upload one file
+     *
      * @param array $file
      * @return stdClass
      */
@@ -197,6 +218,7 @@ class Upload
 
     /**
      * Upload multiple files
+     *
      * @param array $files
      * @return stdClass
      */
@@ -287,11 +309,11 @@ class Upload
 
     /**
      * Re-array files
+     *
      * @param array $file_post files
      * @return array the array
      */
-    private
-    function reArrayFiles(array &$file_post): array
+    private function reArrayFiles(array &$file_post): array
     {
         // Create array
         $file_ary = array();
