@@ -14,6 +14,9 @@ class Updater_API_GitHub
      */
     private static $api_url;
 
+    /**
+     * Updater_API_GitHub constructor.
+     */
     public function __construct()
     {
         // Setup API url ( Without / )
