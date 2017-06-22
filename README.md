@@ -33,8 +33,8 @@ This framework is __NOT__ an CMS. It's build to be the foundation of a website.
 If you're gonna use this framework you gonna need basic PHP, HTML and knowledge of other web programming languages.
 
 # Documentation
-There is a large documentation available on Google drive. 
-You can find it __<a href='https://drive.google.com/open?id=0B7GNGpjSFqW4WG9tN2hfUDE3U1U' target='_blank'>here</a>__!
+There is a large documentation available on GitHub wiki.
+You can find it __<a href='https://github.com/mentimjojo/Custom_FrameWork/wiki' target='_blank'>here</a>__!
 
 # Contributors
  * T.Nijborg - Founder / Lead developer
