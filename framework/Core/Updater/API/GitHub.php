@@ -30,7 +30,7 @@ class Updater_API_GitHub
      */
     private static function api_url(string $url): string
     {
-        // Setup Access token + url
+        // Setup url
         return self::$api_url . '/' . $url;
     }
 
@@ -168,7 +168,7 @@ class Updater_API_GitHub
                     // Setup Curl
                     $curl = new Curl();
                     // Set url
-                    $curl->setUrl($latest->zipball_url . '?access_token=' . Constants::GitHub_API_Access_Token);
+                    $curl->setUrl($latest->zipball_url);
                     // Set POST
                     $curl->setUserAgent('Custom_FrameWork');
                     // Follow location
