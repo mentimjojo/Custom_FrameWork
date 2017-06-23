@@ -13,7 +13,7 @@ class Routes
      * Set home
      * @var
      */
-    private static $home;
+    private static $default;
 
     /**
      * Array with all routes
@@ -44,33 +44,33 @@ class Routes
     }
 
     /**
-     * create route
-     * @param string $url
+     * Create new route
+     * @param string $name
      * @param string $path
      */
-    public static function create(string $url, string $path)
+    public static function create(string $name, string $path)
     {
         // Block chars
         $block_chars = array('&', '#', '$', '^', '*', '(', ')', '\\', '|', ':', ';', ',', '.', '"', "'");
         // Utils
-        if (!Utils::$misc->checkStringOnChars($url, $block_chars)) {
+        if (!Utils::$misc->checkStringOnChars($name, $block_chars)) {
             // Check if route is valid
-            self::$routes[$url] = $path;
+            self::$routes[$name] = $path;
         } else {
             ErrorHandler::warning(106, 'Route url contains not supported chars. Chars allowed: /, -, _');
         }
     }
 
     /**
-     * Set home
+     * Set the default page
      * @param string $path
      */
-    public static function setHome(string $path)
+    public static function setDefault(string $path)
     {
         // Check exists
         if (file_exists(Constants::path_public . '/' . $path)) {
-            // Set home
-            self::$home = $path;
+            // Set default
+            self::$default = $path;
         } else {
             ErrorHandler::die(100, "Home file doesn't exists.");
         }
@@ -89,20 +89,20 @@ class Routes
             if (file_exists($file)) {
                 require_once $file;
             } else {
-                // Check home exists
-                if (isset(self::$home)) {
-                    // Require home
-                    require_once Constants::path_public . '/' . self::$home;
+                // Check default exists
+                if (isset(self::$default)) {
+                    // Require default
+                    require_once Constants::path_public . '/' . self::$default;
                 } else {
                     // Die
                     ErrorHandler::die(100, 'Home is not set, and file/route is not found.');
                 }
             }
         } else {
-            // Check home exists
-            if (isset(self::$home)) {
-                // Require home
-                require_once Constants::path_public . '/' . self::$home;
+            // Check default exists
+            if (isset(self::$default)) {
+                // Require default
+                require_once Constants::path_public . '/' . self::$default;
             } else {
                 // Die
                 ErrorHandler::die(100, 'Home is not set, and file/route is not found.');
