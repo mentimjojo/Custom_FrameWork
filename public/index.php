@@ -5,4 +5,6 @@
  * DON'T DELETE THIS FILE, BECAUSE YOUR SITE WILL NOT WORK WITHOUT IT.
  */
 echo nl2br(FW_Updater::getUpcomingRelease()->description);
+$mail = new Mailer();
+
 ?>

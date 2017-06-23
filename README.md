@@ -39,4 +39,3 @@ You can find it __<a href='https://github.com/mentimjojo/Custom_FrameWork/wiki' 
 # Contributors
  * T.Nijborg - Founder / Lead developer
  * R.Bruil - Developer
- * Muhammed Kandemir - Tester
