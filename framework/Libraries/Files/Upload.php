@@ -57,6 +57,11 @@ class Upload
     {
         // Set path to upload. Path is automatically in public folder
         $this->upload_path = Constants::path_storage . '/Files/' . $path;
+        // Check if exists
+        if(!is_dir($this->upload_path)){
+            // Create dir
+            mkdir($this->upload_path);
+        }
         // Return this object
         return $this;
     }
