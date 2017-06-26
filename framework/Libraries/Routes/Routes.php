@@ -95,7 +95,7 @@ class Routes
                     require_once Constants::path_public . '/' . self::$default;
                 } else {
                     // Die
-                    ErrorHandler::die(100, 'Home is not set, and file/route is not found.');
+                    ErrorHandler::die(100, 'Default is not set, and file/route is not found.');
                 }
             }
         } else {
@@ -105,7 +105,7 @@ class Routes
                 require_once Constants::path_public . '/' . self::$default;
             } else {
                 // Die
-                ErrorHandler::die(100, 'Home is not set, and file/route is not found.');
+                ErrorHandler::die(100, 'Default is not set, and file/route is not found.');
             }
         }
     }
