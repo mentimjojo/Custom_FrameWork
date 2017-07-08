@@ -72,7 +72,7 @@ class Upload
      * @param int $size in MB's
      * @return $this
      */
-    public function setMinSize(int $size = 50)
+    public function setMinSize(int $size = 0)
     {
         // Set min size
         $this->min_size = $size * 1048576;
