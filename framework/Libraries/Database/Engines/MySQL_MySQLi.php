@@ -17,6 +17,7 @@ class MySQL_MySQLi
 
     /**
      * PDO constructor.
+     *
      * @param array $credentials of the database
      */
     public function __construct(array $credentials)
@@ -66,6 +67,7 @@ class MySQL_MySQLi
 
     /**
      * Run query
+     *
      * @param string $query
      * @return array|bool
      */
@@ -88,6 +90,16 @@ class MySQL_MySQLi
         }
         // Just to be sure
         return false;
+    }
+
+    /**
+     * Get last inserted id
+     *
+     * @return mixed
+     */
+    public function getLastInsertedID(){
+        // Return last created id
+        return $this->connection->insert_id();
     }
 
 }

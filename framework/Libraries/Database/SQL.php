@@ -124,6 +124,16 @@ class SQL extends ConnectionPool
         return self::$statement;
     }
 
+    /**
+     * Get last inserted id
+     *
+     * @return mixed
+     */
+    public static function getLastInsertedID(){
+        // Return last created id
+        return parent::get(self::$use_connection)->getLastInsertedID();
+    }
+
 }
 
 
