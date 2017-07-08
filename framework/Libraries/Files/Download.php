@@ -5,24 +5,28 @@ class download
 
     /**
      * Name of the download
+     *
      * @var string
      */
     private $name;
 
     /**
      * Type of the file
+     *
      * @var string
      */
     private $type;
 
     /**
      * File to download.
+     *
      * @var
      */
     private $file;
 
     /**
      * Set the name of a user.
+     *
      * @param string $name
      */
     public function setName(string $name)
@@ -33,6 +37,7 @@ class download
 
     /**
      * Set file to download, path is automatically in Resources/Storage folder.
+     *
      * @param string $path
      */
     public function setFile(string $path)
@@ -77,9 +82,10 @@ class download
 
     /**
      * Download the file
+     *
      * @return stdClass
      */
-    public function start(): stdClass
+    public function get(): stdClass
     {
         // Check if not empty
         if (!empty($this->name)) {
