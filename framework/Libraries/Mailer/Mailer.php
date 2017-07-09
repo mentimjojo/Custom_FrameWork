@@ -57,15 +57,15 @@ class Mailer
      *
      * @var string
      */
-    private $template = 'Mail_Template.html';
+    private $template = 'Mail_Template.php';
 
     /**
-     * Set template of the mail, default is Mail_Template.html
+     * Set template of the mail, default is Mail_Template.php
      *
      * @param  string $template
      * @return $this
      */
-    public function setTemplate(string $template = 'Mail_Template.html')
+    public function setTemplate(string $template = 'Mail_Template.php')
     {
         // Set template
         $this->template = $template;
