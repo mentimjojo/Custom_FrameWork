@@ -59,6 +59,23 @@ class Mailer
      */
     private $template = 'Mail_Template.php';
 
+
+    /**
+     * The live mail template
+     *
+     * @var
+     */
+    private $mail_template;
+
+    /**
+     * Mailer constructor.
+     */
+    public function __construct()
+    {
+        // Get mail template
+        $this->mail_template = file_get_contents(Constants::path_resources . '/Templates/' . $this->template);
+    }
+
     /**
      * Set template of the mail, default is Mail_Template.php
      *
@@ -69,6 +86,8 @@ class Mailer
     {
         // Set template
         $this->template = $template;
+        // Get mail template
+        $this->mail_template = file_get_contents(Constants::path_resources . '/Templates/' . $this->template);
         // Return this
         return $this;
     }
@@ -202,6 +221,17 @@ class Mailer
     }
 
     /**
+     * Replace variable in mail template
+     *
+     * @param string $search
+     * @param string $replace
+     */
+    public function replaceVariable(string $search, string $replace){
+        // Replace variable
+        $this->mail_template = str_replace($search, $replace, $this->mail_template);
+    }
+
+    /**
      * Send the mail
      * @return stdClass
      */
@@ -215,10 +245,8 @@ class Mailer
                         if (file_exists(Constants::path_resources . '/Templates/' . $this->template)) {
                             // Set headers ready
                             $this->setHeaders();
-                            // Get mail template
-                            $mail_temp = file_get_contents(Constants::path_resources . '/Templates/' . $this->template);
                             // Replace message
-                            $mail_temp = str_replace('{message}', $this->message, $mail_temp);
+                            $mail_temp = str_replace('{message}', $this->message, $this->mail_template);
                             // Try sending
                             try {
                                 // Send mail
