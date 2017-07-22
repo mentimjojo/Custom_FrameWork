@@ -27,7 +27,7 @@ class Upload
      * Set the minimal files to upload. Default is 0
      * @var int
      */
-    private $min_files = 0;
+    private $min_files = 1;
 
     /**
      * Max files to upload. Default is 10
@@ -100,7 +100,7 @@ class Upload
      * @param int $min
      * @return $this
      */
-    public function setMinFiles(int $min = 0)
+    public function setMinFiles(int $min = 1)
     {
         // Set min files
         $this->min_files = $min;
