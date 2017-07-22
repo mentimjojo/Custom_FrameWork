@@ -6,13 +6,11 @@
  * DO NOT EDIT ANY OTHER FILES EXCEPT FILES IN THOSE 2 FOLDERS.
  *
  * WARNING WARNING WARNING DO NOT EDIT THIS.
- *
- * Get Framework
  */
+
+// Get the framework
 require_once __DIR__ . '/framework/Framework.php';
 
-/**
- * Create new instance of the framework
- */
+// Create instance of the framework
 new Framework();
 ?>
