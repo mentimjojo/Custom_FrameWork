@@ -41,7 +41,7 @@ class Misc
         // Define random string
         $rand_string = '';
         // Generate
-        for ($i = 0; $i <= $length; $i++) {
+        for ($i = 0; $i < $length; $i++) {
             $rand_string .= $chars[rand(0, $chars_length - 1)];
         }
         // Return random string
