@@ -9,6 +9,16 @@ class FW_Updater extends Github_API
 {
 
     /**
+     * Set the access token for the Github API.
+     *
+     * @param string $token
+     */
+    public static function setAccessToken(string $token){
+        // Set the access token
+        parent::$api_access_token = $token;
+    }
+
+    /**
      * Get current
      *
      * @return object|null

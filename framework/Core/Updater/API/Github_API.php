@@ -15,6 +15,12 @@ class Github_API
     private static $api_url;
 
     /**
+     * API Access Token
+     * @var
+     */
+    protected static $api_access_token;
+
+    /**
      * Updater_API_GitHub constructor.
      */
     public function __construct()
@@ -30,8 +36,14 @@ class Github_API
      */
     private static function api_url(string $url): string
     {
+        // Check if access token present
+        if(empty(self::$api_access_token)) {
+            $token = "";
+        } else {
+            $token = "?access_token=" . self::$api_access_token;
+        }
         // Setup url
-        return self::$api_url . '/' . $url;
+        return self::$api_url . '/' . $url . $token;
     }
 
     /**
