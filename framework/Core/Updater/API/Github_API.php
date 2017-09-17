@@ -5,7 +5,7 @@
  * @Author T.Nijborg
  * @Version 0.1
  */
-class Updater_API_GitHub
+class Github_API
 {
 
     /**

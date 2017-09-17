@@ -5,7 +5,7 @@
  * @Author T.Nijborg
  * @Version 0.1
  */
-class FW_Updater extends Updater_API_GitHub
+class FW_Updater extends Github_API
 {
 
     /**
