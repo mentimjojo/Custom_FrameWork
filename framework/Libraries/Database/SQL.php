@@ -42,7 +42,7 @@ class SQL extends ConnectionPool
      * @param string $name
      * @return static
      */
-    public static function connection(string $name)
+    public static function useConnection(string $name)
     {
         // Set connection
         self::$use_connection = $name;
@@ -65,12 +65,12 @@ class SQL extends ConnectionPool
     }
 
     /**
-     * Set params
+     * Set parameters for query
      *
      * @param array $params
      * @return static
      */
-    public static function setParams(array $params)
+    public static function setParameters(array $params)
     {
         // Set params
         self::$params = $params;
