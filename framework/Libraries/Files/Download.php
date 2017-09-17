@@ -28,24 +28,30 @@ class download
      * Set the name of a user.
      *
      * @param string $name
+     * @return $this;
      */
     public function setName(string $name)
     {
         // Set name
         $this->name = $name;
+        // Return this
+        return $this;
     }
 
     /**
      * Set file to download, path is automatically in Resources/Storage folder.
      *
-     * @param string $path
+     * @param string $file
+     * @return $this
      */
-    public function setFile(string $path)
+    public function setFile(string $file)
     {
         // Set file to download
-        $this->file = Constants::path_storage . '/Files/' . $path;
+        $this->file = Constants::path_storage . '/Files/' . $file;
         // Save file type
-        $this->type = strtolower(pathinfo($path, PATHINFO_EXTENSION));
+        $this->type = strtolower(pathinfo($file, PATHINFO_EXTENSION));
+        // Return this
+        return $this;
     }
 
     /**
