@@ -80,7 +80,7 @@ class FW_Updater extends Github_API
         $array_releases = array();
         // Foreach release
         foreach ($releases as $release) {
-            if ($release->draft && !$upcoming) {
+            if ($release->prerelease && !$upcoming) {
                 // Skip this release
                 continue;
             }
