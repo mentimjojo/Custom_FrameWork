@@ -101,9 +101,9 @@ class FW_Updater extends Github_API
     /**
      * Find update
      *
-     * @return object|null
+     * @return null|stdClass
      */
-    public static function findUpdate()
+    public static function findUpdate() : ?stdClass
     {
         // Latest
         $latest = parent::getLatest();
