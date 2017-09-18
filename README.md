@@ -25,8 +25,8 @@ Underneath you find the requirements of the framework.
 ### Web server
 You're gonna need a web-server with the following on it.
 * PHP >= 7.1 
-* PHP CURL Extension _(For API purposes, Updates, etc)_
-* PHP Database extension _(Only if you're gonna use Databases, see database list above)_
+* PHP CURL Extension _(Optional, but used for Framework Updates, API usages, etc)_
+* PHP Database extension _(Optional, only needed when using Databases. See above list for which PHP extension you need for your Database type)_
 
 ### Knowledge
 This framework is __NOT__ an CMS. It's build to be the foundation of a website.
