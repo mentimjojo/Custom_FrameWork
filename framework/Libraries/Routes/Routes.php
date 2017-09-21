@@ -72,7 +72,7 @@ class Routes
             // Set default
             self::$default = $path;
         } else {
-            ErrorHandler::die(100, "Home file doesn't exists.");
+            ErrorHandler::die(100, "Default file doesn't exists.");
         }
     }
 
