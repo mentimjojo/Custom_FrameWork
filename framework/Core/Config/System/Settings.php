@@ -4,6 +4,13 @@ class Settings
 {
 
     /**
+     * Settings
+     *
+     * @var array settings in array
+     */
+    private static $settings = array();
+
+    /**
      * Toggle debug
      * @param bool $toggle
      */
@@ -35,6 +42,33 @@ class Settings
     {
         // Set timezone
         date_default_timezone_set($timeZone);
+    }
+
+    /**
+     * Set settings variable
+     *
+     * @param string $key
+     * @param $value
+     */
+    public static function set(string $key, $value)
+    {
+        // Add to array
+        self::$settings[$key] = $value;
+    }
+
+    /**
+     * Get settings variable
+     *
+     * @param string $key
+     * @return mixed|null
+     */
+    public static function get(string $key)
+    {
+        if (isset(self::$settings[$key])) {
+            return self::$settings[$key];
+        } else {
+            return null;
+        }
     }
 
     /**
